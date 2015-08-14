@@ -1,0 +1,400 @@
+﻿@model IEnumerable<MealsToGo.Models.TempOrderList>
+
+@using MealsToGo.Helpers
+@using MealsToGo.Models
+@{
+    ViewBag.Title = "Final Order";
+}
+
+<link href="~/Content/themes/smoothness/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+
+<link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/Scripts/grid.locale-en.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="http://mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.js"></script>
+<link href="http://mugifly.github.io/jquery-simple-datetimepicker/jquery.simple-dtpicker.css" rel="stylesheet" type="text/css" />
+
+<!-- CSS -->
+<link rel="stylesheet" href="~/Content/lightbox.css" media="screen,projection" type="text/css" />
+
+<!-- JavaScript -->
+<script type="text/javascript" src="~/Scripts/prototype.js"></script>
+<script type="text/javascript" src="~/Scripts/lightbox.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        funGetCount();
+       // initialize();
+    });
+    jQuery(document).ready(function () {
+        //Delivery/Pickup
+        jQuery('#DeliveryDateTime').appendDtpicker({ minDate: new Date(), defaultDate: '' });
+        //jQuery('#Existing').prop('checked', true);
+        jQuery("input[name='Delivery']").change(function () {
+            if (jQuery(this).val() == 'Delivery') {
+                showShippingInforation();
+            }
+            else {
+                hideShippingInforation();
+            }
+        });
+        //
+        jQuery("input[name='DeliveryAddress']").change(function () {
+            if (jQuery(this).val() == 'New') {
+                jQuery('#shipingInformation input[type="text"]').val("");
+                jQuery('#shipingInformation select').val(0);
+                enableDisable(1);
+            }
+            else {
+                bindShippingInformation();
+            }
+        });
+        function showShippingInforation() {
+            jQuery('#shipingInformation').show();
+        }
+        function hideShippingInforation() {
+            jQuery('#shipingInformation').hide();
+        }
+        jQuery('#shipingInformation input[type="text"]').css('width', '400px');
+        jQuery('#shipingInformation select').css('width', '404px');
+        jQuery('#shipingInformation input[type="text"]').addClass("food-tb2");
+        jQuery('#shipingInformation select').addClass("dist-tb"); //dist - tb
+        hideShippingInforation();
+        function enableDisable(val) {
+            if (val == 0) {
+                jQuery('#shipingInformation input[type="text"]').attr('readonly', true);
+                jQuery('#shipingInformation select').attr('readonly', true);
+            } else {
+                jQuery('#shipingInformation input[type="text"]').removeAttr('readonly');
+                jQuery('#shipingInformation select').removeAttr('readonly');
+            }
+        }
+        function bindShippingInformation() {
+            jQuery.ajax("GetShippingInformation",
+            {
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    //alert(data.Country);
+                    //alert(data.ShippingAddress.Address1);
+                    var combo = jQuery('#country');
+                    combo.append("<option value='0'>Select Country</option>");
+                    jQuery.each(data.Country, function (i, el) {
+                        combo.append("<option value='" + el.country_id + "'>" + el.country_name + "</option>");
+                    });
+                    jQuery('#country').val(data.ShippingAddress.CountryID);
+                    jQuery('#Addresss1').val(data.ShippingAddress.Address1);
+                    jQuery('#Addresss2').val(data.ShippingAddress.Address2);
+                    jQuery('#City').val(data.ShippingAddress.City);
+                    jQuery('#Province').val(data.ShippingAddress.Province);
+                    jQuery('#Telephone').val(data.ShippingAddress.Telephone);
+                    jQuery('#Zip').val(data.ShippingAddress.Zip);
+                    jQuery('#Addresss2').val(data.ShippingAddress.Address2);
+                    enableDisable(0);
+                },
+                error: function (e, s, t) {
+                    alert(e.responseText);
+                    //window.location.href = "cart?id=" + mealItemId;
+                }
+            });
+        }
+        bindShippingInformation();
+        var myData = $grid = jQuery("#list");
+        $grid.jqGrid({
+            url: 'CartJsonData',
+            datatype: "json",
+            width: "100%",
+            colNames: ["Id", "Product Name", "Price", "Qty.", "TotalCost"],
+            colModel: [
+
+                {
+                    name: "id", sorttype: "int", resizable: false, key: true
+                },
+                {
+                    name: "itemName", sorttype: "string", resizable: false, editable: false
+                },
+                {
+                    name: "lineitemcost", align: 'right', resizable: false, editable: false, formatter: 'currency', formatoptions: { prefix: '$', suffix: '', thousandsSeparator: ',' }
+                },
+                {
+                    name: "qty", sorttype: "int", resizable: false, editable: false, editrules: { number: true }
+                },
+                {
+                    name: "TotalCost", align: 'right', resizable: false, editable: false, formatter: 'currency', formatoptions: { prefix: '$', suffix: '', thousandsSeparator: ',' }
+                },
+            ],
+            rowNum: 10,
+            rowList: [5, 10, 20],
+            pager: "#pager",
+            gridview: true,
+            ignoreCase: true,
+            rownumbers: true,
+            hidegrid: false,
+            viewrecords: true,
+            fixed: false,
+            height: "100%",
+            caption: "Product List",
+            loadComplete: function () {
+                var total = $grid.jqGrid('getCol', 'TotalCost', false, 'sum');
+                $grid.jqGrid('footerData', 'set', { qty: 'Total', TotalCost: total });
+            },
+            forceFit: true,
+            cellEdit: true,
+            cellsubmit: 'remote',
+            cellurl: 'UpdatetoCart',
+            footerrow: true,
+            userDataOnFooter: true,
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                if (name == "qty") {
+                    //$grid.trigger("reloadGrid");
+                }
+            },
+            afterSaveCell: function () {
+                jQuery(this).trigger('reloadGrid');
+            }
+        });
+        $grid.hideCol("id");
+        $grid.jqGrid("navGrid", "#pager", { add: false, edit: false, del: false, search: true, nav: false }
+            , {
+                closeOnEscape: true, reloadAfterSubmit: true,
+                afterSubmit: function (response, postdata) {
+                    $grid.trigger("reloadGrid");
+                    return [true, '']
+                }
+            }, { width: 300 });
+
+    });
+    ///Proceed to check out
+    function funProceedToCheckOut() {
+        //delivery=3,pickup 2
+        //cash 1, paypal 2
+
+        var deliveryMode = 3,
+            deliveryDateTime = jQuery('#DeliveryDateTime').val(),
+            paymentmode = 1,
+            countryID = jQuery('#country').val(),
+            address1 = jQuery('#Addresss1').val(),
+            address2 = jQuery('#Addresss2').val(),
+            city = jQuery('#City').val(),
+            province = jQuery('#Province').val(),
+            telephone = jQuery('#Telephone').val(),
+            zip = jQuery('#Zip').val();
+        if (jQuery("input[name='Delivery']:checked").val() !== "Delivery") {
+            deliveryMode = 2
+        }
+        if (jQuery("input[name='Paypal']:checked").val() !== "Cash") {
+            paymentmode = 2
+        }
+
+        jQuery.ajax("ProceedToCheckOutFinalOrder",
+            {
+                data: {
+                    DeliveryMode: deliveryMode, DeliveryDateTime: deliveryDateTime, PaymentOptionID: paymentmode,
+                    Address1: address1, Address2: address2, City: city, CountryID: countryID, Province: province, Telephone: telephone, Zip: zip
+                },
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    if (data.isCashPayment) {
+                        window.location.href = '../Paypal/SuccessCash?orderId=' + data.OrderId;
+                    } else {
+                        //window.location.href = '\PostToPaypal?orderId=' + data.OrderId + '&amount=' + data.amount;
+                        window.location.href = '../Paypal/PaymentWithPaypal?orderId=' + data.OrderId
+                    }
+                }
+            });
+    }
+</script>
+<div class="cont-main">
+    <div class="cont-rit">
+        <div class="gride" width="100%" style="display:none">
+            <table id="list">
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div id="pager"></div>
+        <ul class="gen-form">
+            <li>
+                <p>Delivery / Pickup</p>
+                <label>
+                    <input type="radio" name="Delivery" id="Delivery" value="Delivery" />
+                </label>
+                <span class="normal14" style="width: 50px;float: none;">Delivery</span>
+                <input type="radio" name="Delivery" id="Pickup" value="Pickup" checked="checked" />
+                <span class="normal14" style="width: 50px;float: none;">Pickup</span></li>
+            <div id="shipingInformation">
+                <li>
+                    <p>Shipping Information</p>
+                    <label>
+                        <input type="radio" name="DeliveryAddress" id="Existing" value="Existing" />
+                    </label>
+                    <span class="normal14" style="width: 50px;float: none;">Existing</span>
+                    <input type="radio" name="DeliveryAddress" id="New" value="New" />
+                    <span class="normal14"  style="width: 50px;float: none;">New</span></li>
+                <li>
+                    <p>Address1</p>
+                    <input name="input" id="Addresss1" type="text" class="gen-ftb" />
+                </li>
+                <li>
+                    <p>Address2</p>
+                    <input type="text" id="Addresss2" class="gen-ftb" /></li>
+                <li>
+                    <p>City</p>
+                    <input type="text" id="City" class="gen-ftb" /></li>
+                <li>
+                    <p>Province</p>
+                    <input type="text" id="Province" class="gen-ftb" /></li>
+                <li>
+                    <p>Zip</p>
+                    <input type="text" id="Zip" class="gen-ftb" /></li>
+                <li>
+                    <p>Country</p>
+                    <label>
+                        <select name="country" id="country" class="gen-ftb">
+                            <option>Select Country</option>
+                        </select>
+                    </label>
+                </li>
+                <li>
+                    <p>Telephone</p>
+                    <input type="text" id="Telephone" class="gen-ftb" /></li>
+            </div>
+            <li>
+                <p>Date Time for pickup/delivery</p>
+                <input type="text" id="DeliveryDateTime" class="gen-ftb" value="" /></li>
+            <li>
+                <p>Payment</p>
+                <label>
+                    <input type="radio" name="Paypal" id="Cash" value="Cash" checked="checked" />
+                </label>
+                <span class="normal14" style="width: 50px;float: none;">Cash</span>
+                <input type="radio" name="Paypal" id="Paypal" value="Paypal" />
+                <span class="normal14" style="width: 50px;float: none;">Paypal</span></li>
+
+
+            <li>
+                <label>
+                    <input type="button" onclick="javascript: return funProceedToCheckOut();" name="button2" id="button2" value="Proceed to Checkout" class="submit" />
+                    @*<a href="#" onclick="javascript:return funProceedToCheckOut();" class="submit4">Proceed To Check Out</a>*@
+                </label>
+            </li>
+        </ul>
+        @*<div style="font-family: Verdana; font-size: x-small">
+            <h3>Delivery/Pickup</h3>
+            <table style="font-family: Verdana; font-size: x-small">
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            Delivery/Pickup?
+                        </div>
+                        <div class="editor-field">
+                            <input id="Delivery" type="radio" name="Delivery" value="Delivery" />Delivery &nbsp;
+                                    <input id="Pickup" type="radio" name="Delivery" value="Pickup" checked="checked" />Pickup
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>*@
+        @*<div id="shipingInformation" style="font-family: Verdana; font-size: x-small">
+            <h3>Shipping Information </h3>
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 20%">
+                        <div class="editor-label">Delivery Address</div>
+                        <div class="editor-field">
+                            <input id="Existing" type="radio" name="DeliveryAddress" value="Existing" />Existing &nbsp;
+                                    <input id="New" type="radio" name="DeliveryAddress" value="New" />New 
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">Address 1 </div>
+                        <div class="editor-field">
+                            <input type="text" id="Addresss1" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">Address 2 </div>
+                        <div class="editor-field">
+                            <input type="text" id="Addresss2" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">City </div>
+                        <div class="editor-field">
+                            <input type="text" id="City" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">Province </div>
+                        <div class="editor-field">
+                            <input type="text" id="Province" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">Zip </div>
+                        <div class="editor-field">
+                            <input type="text" id="Zip" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">Country </div>
+                        <div class="editor-field">
+                            <select id="country" name="country"></select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="editor-label">Telephone </div>
+                        <div class="editor-field">
+                            <input type="text" id="Telephone" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>*@
+        @*<div style="font-family: Verdana; font-size: x-small">
+            <h3>Date Time for pickup/delivery</h3>
+            <div class="editor-field">
+                <input type="text" name="DeliveryDateTime" id="DeliveryDateTime" value="">
+            </div>
+        </div>*@
+        @*<div style="font-family: Verdana; font-size: x-small">
+            <h3>Payment</h3>
+           
+            <div class="editor-field">
+                <input id="Cash" type="radio" name="Payment" value="Cash" />Cash &nbsp;
+                                    <input id="Paypal" type="radio" name="Payment" value="Paypal" />Paypal
+            </div>
+        </div>*@
+        @*<a href="#" onclick="javascript:return funProceedToCheckOut();" class="submit4">Proceed To Check Out</a>*@
+        <div></div>
+    </div>
+    <div class="clr"></div>
+
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript" src="~/Scripts/Funfooding_Order.js"></script>
+

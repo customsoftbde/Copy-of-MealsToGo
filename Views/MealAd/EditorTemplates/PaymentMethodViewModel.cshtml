@@ -1,0 +1,10 @@
+﻿@model MealsToGo.ViewModels.PaymentMethodViewModel
+
+
+  
+    @Html.CheckBoxFor(model =>model.Selected)
+ @Html.LabelFor(model => model.Selected, Model.PaymentMethod, new { @class = "checkbox" })
+       
+   @Html.HiddenFor(model => model.PaymentMethodID)
+ 
+           

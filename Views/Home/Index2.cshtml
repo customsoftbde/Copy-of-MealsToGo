@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>http://stackoverflow.com/q/19635041/315935</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/redmond/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.ok-soft-gmbh.com/jqGrid/jquery.jqGrid-4.5.4/css/ui.jqgrid.css" />
+    <style type="text/css">
+        html, body { font-size: 75%; }
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://www.ok-soft-gmbh.com/jqGrid/jquery.jqGrid-4.5.4/js/i18n/grid.locale-en.js"></script>
+    <script type="text/javascript">
+        $.jgrid.no_legacy_api = true;
+        $.jgrid.useJSON = true;
+    </script>
+    <script type="text/javascript" src="http://www.ok-soft-gmbh.com/jqGrid/jquery.jqGrid-4.5.4/js/jquery.jqGrid.src.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        /*global $ */
+        /*jslint vars: true */
+        $(function () {
+            "use strict";
+            var myData = {
+                id: "509403957ae7d3929edcb812",
+                name: "MYBOOK",
+                layout: {
+                    chapters: [
+                        {
+                            name: "myfirstchapter",
+                            sequence: 1,
+                            title: "My First Chapter",
+                            files: [
+                                { filetype: "tex", name: "myfirstfile" },
+                                { filetype: "tmpl", name: "myfileb" }
+                            ]
+                        },
+                        {
+                            name: "mysecondchapter",
+                            sequence: 2,
+                            title: "My Second Chapter",
+                            files: [
+                                { filetype: "tex", name: "myintro" },
+                                { filetype: "tex", name: "myfilec" }
+                            ]
+                        }
+                    ]
+                }
+            },
+                $grid = $("#list");
+
+            $grid.jqGrid({
+                datatype: "local",
+                data: myData.layout.chapters,
+                colNames: ["Sequence", "Name", "Title"],
+                colModel: [
+                    { name: "sequence", width: 65, key: true },
+                    { name: "name", width: 150 },
+                    { name: "title", width: 150 }
+                ],
+                rowNum: 10,
+                rowList: [5, 10, 20],
+                pager: "#pager",
+                gridview: true,
+                ignoreCase: true,
+                rownumbers: true,
+                sortname: "sequence",
+                viewrecords: true,
+                height: "100%",
+                subGrid: true,
+                subGridRowExpanded: function (subgridId, rowid) {
+                    var subgridTableId = subgridId + "_t";
+                    $("#" + subgridId).html("<table id='" + subgridTableId + "'></table>");
+                    $("#" + subgridTableId).jqGrid({
+                        datatype: "local",
+                        data: $(this).jqGrid("getLocalRow", rowid).files,
+                        colNames: ["Name", "Filetype"],
+                        colModel: [
+                            { name: "name", width: 130, key: true },
+                            { name: "filetype", width: 130 }
+                        ],
+                        height: "100%",
+                        rowNum: 10,
+                        sortname: "name",
+                        idPrefix: "s_" + rowid + "_"
+                    });
+                },
+                caption: "Demonstrate how to add custom \"Expand/Collapse all subgrids\" button"
+            });
+            $grid.jqGrid("navGrid", "#pager", { add: false, edit: false, del: false });
+            var subGridOptions = $grid.jqGrid("getGridParam", "subGridOptions"),
+                plusIcon = subGridOptions.plusicon,
+                minusIcon = subGridOptions.minusicon,
+                expandAllTitle = "Expand all subgrids",
+                collapseAllTitle = "Collapse all subgrids";
+            $("#jqgh_" + $grid[0].id + "_subgrid")
+                .html('<a style="cursor: pointer;"><span class="ui-icon ' + plusIcon + '" title="' + expandAllTitle + '"></span></a>')
+                .click(function () {
+                    var $spanIcon = $(this).find(">a>span"),
+                        $body = $(this).closest(".ui-jqgrid-view")
+                            .find(">.ui-jqgrid-bdiv>div>.ui-jqgrid-btable>tbody");
+                    if ($spanIcon.hasClass(plusIcon)) {
+                        $spanIcon.removeClass(plusIcon)
+                            .addClass(minusIcon)
+                            .attr("title", collapseAllTitle);
+                        $body.find(">tr.jqgrow>td.sgcollapsed")
+                            .click();
+                    } else {
+                        $spanIcon.removeClass(minusIcon)
+                            .addClass(plusIcon)
+                            .attr("title", expandAllTitle);
+                        $body.find(">tr.jqgrow>td.sgexpanded")
+                            .click();
+                    }
+                });
+        });
+        //]]>
+    </script>
+</head>
+<body>
+    <table id="list"><tr><td></td></tr></table>
+    <div id="pager"></div>
+</body>
+</html>
+
+ui-state-default ui-th-column ui-th-ltr

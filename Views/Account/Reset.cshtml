@@ -1,0 +1,42 @@
+﻿@model MealsToGo.Models.ResetModel
+@{
+    ViewBag.Title = "ResetPassword";
+}
+
+<div class="cont-main">
+    <h1>Reset Password</h1>
+
+
+    @using (Html.BeginForm("Reset", "Account"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false,"", new { @class = "error" })
+        <div class="cont">
+            <ul class="gen-form">
+                <li>
+                    <p>User Name</p>
+                    @Html.DisplayFor(m => m.UserName, new { @class = "gen-ftb" })
+                   @Html.HiddenFor(m => m.UserName, new { @class = "gen-ftb" })
+                </li>
+               <li>
+                    <p>Password/p>
+                    @Html.PasswordFor(m => m.Password, new { @class = "gen-ftb" })
+                   
+                </li>
+                <li>
+                    <p>Confirm Password</p>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "gen-ftb" })
+                   
+                </li>
+                <li>
+                    <label>
+                        <input type="submit" name="button2" id="button2" value="Reset Password" class="submit" />
+                    </label>
+                </li>
+               
+                <div class="clr"></div>
+            </ul>
+            <div class="clr"></div>
+        </div>
+    }
+</div>

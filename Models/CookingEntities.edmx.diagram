@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3355a899d94c403f986611d7cf06856d" Name="Diagram1" ZoomLevel="82">
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_OrderDetails_Orders" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.AddressList" Width="1.5" PointX="6" PointY="27.5" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.AllEmail" Width="1.5" PointX="11.375" PointY="7.875" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.Cart" Width="1.5" PointX="3.75" PointY="8" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.Connection" Width="1.5" PointX="11.125" PointY="15.375" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.country" Width="1.5" PointX="9.75" PointY="9.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.EmailSubscription" Width="1.5" PointX="6.75" PointY="31.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPActivityType" Width="1.5" PointX="7.5" PointY="17" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPAssociationType" Width="1.5" PointX="2" PointY="29.625" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPCountry" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPCuisineType" Width="1.5" PointX="10.875" PointY="30.5" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPDietType" Width="1.5" PointX="0.75" PointY="4.5" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPMealType" Width="1.5" PointX="4" PointY="24.5" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPPrivacySetting" Width="1.5" PointX="8.375" PointY="11.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPServingUnit" Width="1.5" PointX="4.25" PointY="28.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.OrderDetail" Width="1.5" PointX="0.5" PointY="1.375" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.Order" Width="1.5" PointX="7.75" PointY="23.875" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.SendText" Width="1.5" PointX="5.875" PointY="14.625" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.state" Width="1.5" PointX="8.375" PointY="19.5" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.UserPaymentOption" Width="1.5" PointX="2" PointY="1.375" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_UserAddressList_CountryLKUP" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealOrderDetails_MealOrders" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.NotificationFrequency" Width="1.5" PointX="7.125" PointY="0.5" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LocationsSearched" Width="1.5" PointX="8.625" PointY="32.875" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.MealItems_Photos" Width="1.5" PointX="4.375" PointY="31.5" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPAllergenicFood" Width="1.5" PointX="8.125" PointY="15.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.MealItem" Width="1.5" PointX="13.75" PointY="23.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.MealItems_AllergenicFoods" Width="1.5" PointX="8.625" PointY="29" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_LKUPAllergenicFood" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealItems_CuisineTypeLKUP" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealItems_LKUPDietType" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="5.6547768538714394" />
+          <ConnectorPoint PointX="3.75" PointY="7.400126953125" />
+          <ConnectorPoint PointX="6.385416666666667" PointY="7.4001269531249987" />
+          <ConnectorPoint PointX="6.552083333333333" PointY="7.400126953125" />
+          <ConnectorPoint PointX="10.416666666666666" PointY="7.4001269531249987" />
+          <ConnectorPoint PointX="10.583333333333334" PointY="7.400126953125" />
+          <ConnectorPoint PointX="14.233739719501022" PointY="7.400126953125" />
+          <ConnectorPoint PointX="14.233739719501022" PointY="22.75" />
+          <ConnectorPoint PointX="14.5" PointY="22.75" />
+          <ConnectorPoint PointX="14.5" PointY="23.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealItems_MealTypeLKUP" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealItems_LKUPServingUnit" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_MealItems" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealItems_Photos_MealItems" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.webpages_Membership" Width="1.5" PointX="6" PointY="24.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.TempOrderList" Width="1.5" PointX="4" PointY="3.375" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.TempUserOrder" Width="1.5" PointX="0.5" PointY="31" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.FunOrderDetail" Width="1.5" PointX="5.8975956374302481" PointY="11.855570530451635" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.FunOrder" Width="1.5" PointX="11.313435248710883" PointY="0.95904621526554512" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_FunOrderDetails_FunOrders" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.SendEmail" Width="1.5" PointX="0.625" PointY="7.625" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.ActiveMealAd" Width="1.5" PointX="13.75" PointY="10.875" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.LKUPKitchenType" Width="1.5" PointX="14.25" PointY="1.25" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.UserDetail" Width="1.5" PointX="0.9216557112157604" PointY="18.055076592627483" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_UserDetails_AddressList" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_UserDetails_AddressList1" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_UserDetails_KitchenType" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.SellerDefaultSetting" Width="1.5" PointX="11" PointY="12.25" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.UserAgreement" Width="1.5" PointX="0.45075796006748359" PointY="15.857585452430689" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.UserAgreementsAcceptanceDetail" Width="1.5" PointX="4.0824434031184964" PointY="16.069899179073936" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.AvailabilityType" Width="1.5" PointX="9.75" PointY="5.125" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.MealAds_PaymentOptions" Width="1.5" PointX="0.15934988677471407" PointY="12.852201020741928" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.PaymentOption" Width="1.5" PointX="9.3519767324216563" PointY="24.887956079509088" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_PaymentOptions" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.MealAds_DeliveryMethods" Width="1.5" PointX="7.6690802349099334" PointY="11.25351438450325" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.MealAd" Width="1.5" PointX="10.278801730963775" PointY="15.077033318149407" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealAds_AvailabilityTypes" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_Cart_MealAds" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealAds_DeliveryMethods_MealAds" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealAds_MealItems" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealAds_MealItems1" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_MealAds" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_OrderDetails_MealAds" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.MealAd_Schedules" Width="1.5" PointX="10.775244265224433" PointY="22.478186707235029" />
+        <AssociationConnector Association="ThreeSixtyTwoModel.FK_MealAd_Schedules_MealAds" />
+        <EntityTypeShape EntityType="ThreeSixtyTwoModel.ContactList" Width="1.5" PointX="2.6766591345317008" PointY="3.161683680099288" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

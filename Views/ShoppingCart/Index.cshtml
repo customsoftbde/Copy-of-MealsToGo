@@ -1,0 +1,88 @@
+﻿@model MealsToGo.ViewModels.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+<script src="/Scripts/jquery-1.4.4.min.js"
+type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        // Document.ready -> link up remove event handler
+        jQuery(".RemoveLink").click(function () {
+            // Get the id from the link
+            var recordToDelete = jQuery(this).attr("data-id");
+            if (recordToDelete != '') {
+                // Perform the ajax post
+                jQuery.post("/ShoppingCart/RemoveFromCart", {"id": recordToDelete },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.ItemCount == 0) {
+                            jQuery('#row-' + data.DeleteId).fadeOut('slow');
+                        } else {
+                            jQuery('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        jQuery('#cart-total').text(data.CartTotal);
+                        jQuery('#update-message').text(data.Message);
+                        jQuery('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+            }
+        });
+    });
+</script>
+<h3>
+    <em>Review</em> your cart:
+ </h3>
+<p class="button">
+    @Html.ActionLink("Checkout>>", "ShippingAndPayment", "Checkout",new { @class = "menu-14u" })
+</p>
+<div id="update-message">
+</div>
+<table>
+    <tr>
+        <th>
+            mealad Name
+        </th>
+        <th>
+            Price (each)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in
+Model.CartItems)
+    {
+        <tr id="row-@item.RecordID">
+            <td>
+                @Html.ActionLink(item.MealAd.MealItem.MealItemName,
+               
+"Details", "Store", new { id = item.MealAdID },new { @class = "menu-14u" })
+            </td>
+            <td>
+                @item.MealAd.MealItem.Price
+               
+            </td>
+            <td id="item-count-@item.RecordID">
+                @item.Count
+            </td>
+            <td>
+                <a href="#" class="RemoveLink"
+data-id="@item.RecordID">Remove
+from cart</a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            Total
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td id="cart-total">
+            @Model.CartTotal
+        </td>
+    </tr>
+</table>

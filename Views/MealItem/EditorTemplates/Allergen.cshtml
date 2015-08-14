@@ -1,0 +1,9 @@
+﻿@model MealsToGo.ViewModels.Allergen
+
+
+  
+ @Html.CheckBoxFor(model =>model.Selected)
+ @Html.LabelFor(model => model.Selected, Model.AllergenName, new { @class = "checkbox" })
+ @Html.HiddenFor(model => model.AllergenID)
+ 
+           

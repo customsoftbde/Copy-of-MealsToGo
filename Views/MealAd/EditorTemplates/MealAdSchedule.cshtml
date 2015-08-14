@@ -1,0 +1,9 @@
+﻿@model MealsToGo.ViewModels.MealAdSchedule
+
+
+  
+    @Html.EditorFor(model => model.PickUpStartDateTime, new { @class = "gen-ftb" })
+    @Html.ValidationMessageFor(model => model.PickUpStartDateTime)
+
+ @Html.EditorFor(model => model.PickUpEndDateTime, new { @class = "gen-ftb" })
+    @Html.ValidationMessageFor(model => model.PickUpEndDateTime)

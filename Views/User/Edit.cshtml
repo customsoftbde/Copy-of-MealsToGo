@@ -1,0 +1,241 @@
+﻿@model MealsToGo.Models.UserDetail
+
+@{
+    ViewBag.Title = "Edit";
+
+    Model.DateCreated = DateTime.Now;
+    Model.UserStatus = 1;
+}
+<script language=Javascript>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+</script>
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.DateUpdated)
+    @Html.HiddenFor(model => model.DateCreated)
+    @Html.HiddenFor(model => model.UserStatus)
+    @Html.HiddenFor(model => model.AddressList.AddressID)
+    <div class="cont-main">
+        <h1>Update user details</h1>
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>Photo</p>
+                        @if (!string.IsNullOrEmpty(Model.Photo))
+                        {
+                            <img src="~/ProfilePhotos/@(Model.Photo)" width="200" height="150"  id="profilepic" />
+                            <a href="#" class="RemoveProfilePhoto" name="@Model.UserId">Remove</a>
+                        }
+                        
+                        @Html.TextBoxFor(model => model.Photo, new { type = "file", accept = ".png,.bmp,.jpg,.tif,.gif" })
+                        @*@Html.ValidationMessageFor(model => model.Photo)*@
+                            
+                    </li>
+                    <li>
+                        <p>First Name</p>
+                        @Html.EditorFor(model => model.FirstName, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </li>
+                    <li>
+                        <p>Last Name</p>
+                        @Html.EditorFor(model => model.LastName, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </li>
+                    <li>
+                        <p>Address 1</p>
+                        @Html.EditorFor(model => model.AddressList.Address1, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.AddressList.Address1)
+                    </li>
+                    <li>
+                        <p>Address 2</p>
+                        @Html.EditorFor(model => model.AddressList.Address2, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.AddressList.Address2)
+                    </li>
+                    <li>
+                        <p>City</p>
+                        @Html.EditorFor(model => model.AddressList.City, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.AddressList.City)
+                    </li>
+                    <li>
+                        <p>Zip</p>
+                        @Html.EditorFor(model => model.AddressList.Zip, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.AddressList.Zip)
+                    </li>
+                    <li>
+                        <p>Country</p>
+                        @*ViewBag.CountryDDList*@
+                        @Html.DropDownListFor(model => model.AddressList.CountryID, ViewBag.CountryDDList as IEnumerable<SelectListItem>)
+                        @*@Html.EditorFor(model => model.AddressList.LKUPCountry.Country)*@
+                        @Html.ValidationMessageFor(model => model.AddressList.CountryID)
+                    </li>
+                    <li>
+                        <p>Province</p>
+                        @Html.EditorFor(model => model.AddressList.Province, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.AddressList.Province)
+                    </li>
+                    <li>
+                        <p>Telephone</p>
+                        <input id="Telephone" type="text" maxlength="16" onkeypress="return isNumberKey(event)" class="gen-ftb" />
+                        @*@Html.EditorFor(model => model.AddressList.Telephone, new {  maxlength="16", onkeypress="return isNumberKey(event)", @class = "gen-ftb" })*@
+                        @Html.ValidationMessageFor(model => model.AddressList.Telephone)
+                    </li>
+                    <li>
+                        <p>Mobile</p>
+                        <input id="Mobile" type="text" maxlength="16" onkeypress="return isNumberKey(event)" class="gen-ftb" />
+                        @*@Html.EditorFor(model => model.Mobile, new {  maxlength="16", onkeypress="return isNumberKey(event)", @class = "gen-ftb" })*@
+                        @Html.ValidationMessageFor(model => model.Mobile)
+                    </li>
+                    <li>
+                        <p>SkypeID</p>
+                        @Html.EditorFor(model => model.SkypeID, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.SkypeID)
+                    </li>
+                    <li>
+                        <p>Identification Number</p>
+                        @Html.EditorFor(model => model.IdentificationNumber, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.IdentificationNumber)
+                    </li>
+                    <li>
+                        <p>Passport Number</p>
+                        @Html.EditorFor(model => model.PassportNumber, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.PassportNumber)
+                    </li>
+
+                    <li>
+                        <label>
+
+                            <input type="submit" name="button2" id="button2" value="Update Profile" class="submit" />
+                        </label>
+                        <a href="#" class="menu-14u ">@Html.ActionLink("Back to List", "Index",null,new { @class = "menu-14u" })</a></li>
+                    <div class="clr"></div>
+                </ul>
+
+
+            </div>
+            <div class="clr"></div>
+
+        </div>
+
+    </div>
+@*<fieldset>
+        <legend>UserInfo</legend>
+        @Html.DisplayFor(model => model.UserId)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.DateUpdated)
+        @Html.HiddenFor(model => model.DateCreated)
+        @Html.HiddenFor(model => model.UserStatus)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Photo)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Photo, new { type = "file" })
+            @Html.ValidationMessageFor(model => model.Photo)
+
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressList.Address1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddressList.Address1)
+            @Html.ValidationMessageFor(model => model.AddressList.Address1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressList.Address2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddressList.Address2)
+            @Html.ValidationMessageFor(model => model.AddressList.Address2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressList.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddressList.City)
+            @Html.ValidationMessageFor(model => model.AddressList.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressList.Province)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddressList.Province)
+            @Html.ValidationMessageFor(model => model.AddressList.Province)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressList.Zip)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddressList.Zip)
+            @Html.ValidationMessageFor(model => model.AddressList.Zip)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressList.LKUPCountry.Country)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddressList.LKUPCountry.Country)
+            @Html.ValidationMessageFor(model => model.AddressList.LKUPCountry.Country)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressList.Telephone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AddressList.Telephone)
+            @Html.ValidationMessageFor(model => model.AddressList.Telephone)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Notes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Notes)
+            @Html.ValidationMessageFor(model => model.Notes)
+        </div>
+
+
+
+        <p>
+
+            <input type="submit" value="Update" />
+        </p>
+    </fieldset>*@
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/Funfooding_Order.js"></script>

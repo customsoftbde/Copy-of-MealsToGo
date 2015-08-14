@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+@{
+    if (Request.IsAuthenticated)
+    {
+     Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+    else
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+}
+<div class="cont-main">
+  <h1>Contact Us</h1>
+  <div class="cont">
+    <p> Have a question?  <br />
+  <br />
+        Call us at 914 843 8357
+    <br />
+  Or email us as  <a href="mailto:info@funfooding.com target="_top">info@funfooding.com</a>
+        
+       
+  </div>
+
+</div>
+

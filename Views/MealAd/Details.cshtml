@@ -1,0 +1,108 @@
+﻿@model MealsToGo.ViewModels.MealAdViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="cont-main">
+    <h1>Meal Ad - Details</h1>
+
+    <div class="cont">
+        <div class="cont-rit">
+            <ul class="gen-form">
+                <li>
+                    <p>Meal Ad - Details</p>
+
+                    @Html.DisplayFor(x => x.MealItemName)
+                </li>
+                <li>
+                    <p>Schedule</p>
+
+                    @*@Html.EditorFor(model => model.MealAdSchedules)*@
+                    <table id="tblMealAdSchedules">
+
+                        @*@for (int i = 0; i < Model.MealAdSchedules.Count; i++)*@
+                        @for (int i = 0; i <1; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => model.MealAdSchedules[i].PickUpStartDateTime) &nbsp; &nbsp;
+                                    @Html.DisplayFor(model => model.MealAdSchedules[i].PickUpEndDateTime)
+                                </td>
+                            </tr>
+                        }
+
+
+                    </table>
+
+
+                </li>
+                <li>
+                    <p>Max Order</p>
+                    @Html.DisplayFor(model => model.MaxOrders, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Placed Order</p>
+                    @Html.DisplayFor(model => model.PlacedOrder, new { @class = "gen-ftb" })
+                </li>
+
+                @*@Html.ActionLink("Add category...", "AddCategory", null, new { id = "addCategoryItem" })*@
+                @*<a href="#" id="aMealAdSchedules">Add another schedule</a>*@
+
+                <li>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.MealAdID }, new { @class = "menu-14u" }) |
+                    @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                </li>
+                <div class="clr"></div>
+            </ul>
+
+
+        </div>
+        <div class="clr"></div>
+
+    </div>
+
+</div>
+
+@*<fieldset>
+        <legend>MealAd</legend>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.MealItemID)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.MealItemID)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.PickUpTime)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.PickUpTime)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.MaxOrders)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.MaxOrders)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.PlacedOrder)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.PlacedOrder)
+        </div>
+
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.LastOrderTime)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.LastOrderTime)
+        </div>
+    </fieldset>*@
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MealAdID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

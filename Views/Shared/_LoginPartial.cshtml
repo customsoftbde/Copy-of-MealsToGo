@@ -1,0 +1,221 @@
+﻿
+
+@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+{
+    @Html.AntiForgeryToken()
+
+}
+@if (Request.IsAuthenticated)
+{
+
+    <div id="header">
+        <div class="header-bl">
+
+            @*<p class="top-rt">H! Suresh  |  <a href="#">Logout</a>  |  <a href="#"><strong>Cart(5) </strong></a></p>  @User.Identity.Name.Split('@')[0] *@
+            @*<p class="top-rt">Hi @Convert.ToString(Session["FirstName"])  |  <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a> |
+                <a href="\home\cart" id="showcart"><strong>Cart(<span id="cartCount"></span>)</strong></a></p>*@
+            <div class="user-drop" style="margin-left: 389px;">
+                <div class="dropdown">
+                    <a class="account">
+                        <span>
+                            Hi @Convert.ToString(Session["FirstName"])
+                            <br />
+                            <span style="font-size: 10px;">Your Account</span>
+                        </span>
+                    </a>
+                    <div class="submenu" style="display: none;">
+                        <ul class="root">
+                            <li>
+                                <a href="#signout">My Account</a>
+                            </li>
+                            <li>
+                                <a href="#signout">My Orders</a>
+                            </li>
+                            <li>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/home/cart" id="trigger">
+                <div class="user-drop2">
+                    Cart
+                    <div class="circle"><span id="cartCount"></span></div>
+                </div>
+            </a>
+            @*<div class="user-drop2">Cart <div class="circle">(<span id="cartCount"></span>)</div></div>*@
+            @*<div class="user-drop2">Cart <span><a href="\home\cart" id="trigger" class="menuwhite-14">(<span id="cartCount"></span>)</a></span></div>*@
+            <div id="pop-up">
+                @*<table width="100%" border="1" cellpadding="5" cellspacing="0" bordercolor="#E8E8E8" style="border-collapse: collapse;">
+                            <tbody>
+                                <tr>
+                                    <td width="96%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Product(s)</strong></td>
+                                    <td width="4%" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Price</strong></td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="3">
+                                            <tr>
+                                                <td width="19%"><strong>
+                                                    <img src="images/prod1.jpg" width="136" height="84" /></strong></td>
+                                                <td width="81%" align="left" valign="top" class="normal14"><strong><span class="blue-14">Herve Leger One
+                    Shoulder...</span><br />
+                                                    <span class="normal-12">Herve Leger One Shoulder Ombre Dress</span></strong></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td align="center" valign="middle">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2" align="right" valign="middle"><strong>
+
+                                        <a href="#"  class="submit3" >More</a>
+                                    </strong></td>
+                                </tr>
+                            </tbody>
+                        </table>*@
+            </div>
+        </div>
+    </div>
+    <div class="clr"></div>
+}
+else
+{<p class="top-rt">
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginButton" }) | @Html.ActionLink("Sign Up", "Login", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    </p>
+    <div id="loginBox" style="display: none; top: 70px; right: 31px;">
+        <form id="loginForm" action="/Account/Login" method="post">
+            @Html.AntiForgeryToken()
+            <fieldset id="body">
+               
+                <fieldset>
+                  @Html.TextBox("UserName", null, new { type = "text", @class = "login-tb", placeholder = "User Name" })
+                    @*<input type="text" name="UserName" id="UserName" class="login-tb" placeholder="User Name">*@
+                </fieldset>
+                <fieldset>
+                    @Html.Password("Password", null, new { type = "password", @class = "login-tb", placeholder = "Password" })                   
+                    @*<input type="password" name="Password" id="Password" class="login-tb" placeholder="Password">*@
+                </fieldset>
+
+                @*<a href="#" class="menu-wh12" style="margin-top:10px">
+                    @Html.CheckBox("RememberMe", new { @class = "login-tb", Styles = "float: left; width: 15px;" }) Remember Me
+                </a>*@
+                @*<input type="checkbox" id="RememberMe" name="RememberMe" class="login-tb">Remember Me*@      
+                <fieldset>
+                    <label style="width: 150px;">
+                        <label style="color: #0b15c8; text-decoration: underline; cursor: pointer; ">
+                            @Html.CheckBox("RememberMe", new { @class = "login-tb", Styles = "float: left; width: 15px;margin-top:10px" })
+                            Remember me
+                        </label>
+                    </label>
+                </fieldset>
+                    <input type="submit" id="login" value="Sign in">
+
+                    <label style="width: 140px; margin-top: 8px;"><a href="#" class="menu-wh12">Reset password</a></label>
+                </fieldset>
+        </form>
+        
+    </div>
+
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var moveLeft = -200;
+        var moveDown = 10;
+
+        jQuery('a#trigger').hover(function (e) {
+            jQuery('#pop-up').hide();
+            jQuery('#pop-up').empty();
+
+            jQuery.ajax("/Home/getOrderProdcutList",
+        {
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                jQuery('#pop-up').empty();
+                //alert(response.length);
+                if (response.length > 0) {
+                    //jQuery('div#pop-up').append('<table width="100%" border="1" cellpadding="5" cellspacing="0" bordercolor="#E8E8E8" style="border-collapse: collapse;"></table>');
+                    //var table = jQuery('div#pop-up').children();
+                    //table.append('<tr><td width="96%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Product(s)</strong></td><td width="4%" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Price</strong></td></tr>');
+                    jQuery('div#pop-up').append('<table width="100%" border="1" cellpadding="5" cellspacing="0" bordercolor="#E8E8E8" style="border-collapse: collapse;top:10px;"></table>');
+
+                    var table = jQuery('div#pop-up').children();
+                    table.append('<tr><td width="96%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Product(s)</strong></td><td width="4%" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Price</strong></td></tr>');
+
+                    jQuery.each(response, function (index, item) {
+                        table.append('<tr><td align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr>' +
+                            '<td width="81%" align="left" valign="top" class="normal14"><strong><span class="blue-14">' + item.itemName + '</span>' +
+                              '<span class="normal-12"></span></strong></td></tr></tbody></table></td><td align="center" valign="middle">' + item.TotalCost + '</td></tr>');
+                    });
+                    jQuery('div#pop-up').show();
+                }
+                else {
+                    //var table = jQuery('div#pop-up').children();
+                    //table.append('<tr><td width="96%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Product(s)</strong></td><td width="4%" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Price</strong></td></tr>');
+
+                    //table.append('<tr><td align="left" valign="top" colspan="2"> No products added to the cart.</td>');
+                    // jQuery('div#pop-up').hide();
+                }
+
+                //Add and Display no. records in cart at the header section
+            },
+            error: function (e, s, t) {
+                //alert(e.respon);
+            }
+        });
+
+
+
+            //.css('top', e.pageY + moveDown)
+            //.css('left', e.pageX + moveLeft)
+            //.appendTo('body');
+        }, function () {
+            jQuery('div#pop-up').hide();
+        });
+
+        jQuery('a#trigger').mousemove(function (e) {
+            jQuery("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+        });
+
+
+
+        jQuery('.account').on('click', function () {
+            jQuery('.dropdown .submenu').show();
+        });
+        jQuery('#RememberMe').width(10);
+        var button = jQuery('#loginButton');
+        var box = jQuery('#loginBox');
+        var form = jQuery('#loginForm');
+        button.removeAttr('href');
+        button.mouseup(function (login) {
+            box.toggle();
+            button.toggleClass('active');
+        });
+        form.mouseup(function () {
+            return false;
+        });
+        jQuery(this).mouseup(function (login) {
+            if (!button.hasClass('active')) {
+                button.removeClass('active');
+                box.hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    function ActiveCheckBox() {
+        var check = document.getElementById("RememberMe");
+        if (check.checked) {          
+            check.checked = false;           
+        }
+        else {           
+            check.checked = true;            
+        }
+    }
+
+</script>

@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "About";
+    
+}
+@{
+    if (Request.IsAuthenticated)
+    {
+     Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+    else
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+}
+
+<div class="cont-main">
+  <h1>About Us</h1>
+  <div class="cont">
+    <p>
+        Funfooding.com is online and mobile food ordering website that connects diners with local restaurants, caterers and aspiring chefs serving home cooked food.
+  The idea is to provide diners with unlimited varied options available from our diverse network of providers.<br />
+ 
+        A diner can place an order a takeout for an immediate or scheduled for later with the option to pick up or get delivered.
+        <br /><br />
+        Feeling hungry at the wee hour? <br />
+        Search for restaurants serving at that hour.<br />
+        <br />
+        In the mood to dine out? <br />
+        Search for specials/promotions before heading out.
+          <br /><br />
+        <b>We aspire to make your fooding experience fun!</b>
+        Have new ideas? @Html.ActionLink("Talk", "Contact", "Company") to us. We are all ears!
+         
+  </div>
+
+</div>

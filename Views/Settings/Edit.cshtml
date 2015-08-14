@@ -1,0 +1,119 @@
+﻿@model MealsToGo.ViewModels.UserSettingsViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+    <div class="cont-main">
+        <h1>Edit</h1>
+        @Html.HiddenFor(model => model.UserSettingsID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.ActivityTypeID)
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>@Html.LabelFor(model => model.ActivityType)</p>
+                        @*<label style="margin-top:10px">@Model.ActivityType</label>*@
+                        @Html.DisplayName(Model.ActivityType)
+
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.PrivacySetting)</p>
+                        @Html.DropDownListFor(x => x.PrivacySettingID, Model.PrivacySettingList, "Privacy Options", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.PrivacySettingID)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.ReceiveEmailNotification)</p>
+                        @Html.DropDownListFor(x => x.ReceiveEmailNotificationID, Model.YesNo, "Choose Options", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.ReceiveEmailNotificationID)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.ReceiveMobileTextNotification)</p>
+                        @Html.DropDownListFor(x => x.ReceiveMobileTextNotificationID, Model.YesNo, "Choose Options", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.ReceiveMobileTextNotificationID)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.NotificationFrequency)</p>
+                        @Html.DropDownListFor(x => x.NotificationFrequencyID, Model.NotificationFrequencyList, "Privacy Options", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.NotificationFrequencyID)
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="submit" name="button2" id="button2" value="Save" class="submit" />
+                        </label>
+
+                        @*@Html.ActionLink("Back to List", "Index", new { @class = "menu-14u" })*@
+                        @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                    </li>
+                    <div class="clr"></div>
+                </ul>
+            </div>
+            <div class="clr"></div>
+        </div>
+    </div>
+@*<fieldset>
+        <legend>UserSetting</legend>
+
+        @Html.HiddenFor(model => model.UserSettingsID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.ActivityTypeID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActivityType)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.ActivityType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PrivacySetting)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.PrivacySettingID, Model.PrivacySettingList, "Privacy Options")
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReceiveEmailNotification)
+        </div>
+        <div class="editor-field">
+            <div class="editor-field">
+                @Html.DropDownListFor(x => x.ReceiveEmailNotificationID, Model.YesNo, "Choose Options")
+                )
+)
+            </div>
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReceiveMobileTextNotification)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.ReceiveMobileTextNotificationID, Model.YesNo, "Choose Options")
+            )
+)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NotificationFrequency)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.NotificationFrequencyID, Model.NotificationFrequencyList, "Privacy Options")
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>*@
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

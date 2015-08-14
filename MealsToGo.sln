@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealsToGo", "MealsToGo.csproj", "{4796FD31-2004-4597-8662-549BA9EFDE98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealsToGoConsoleApp", "..\MealsToGoConsoleApp\MealsToGoConsoleApp.csproj", "{822D066C-CB2F-43E1-9B84-7D426A31C24C}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MealsToGo.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4796FD31-2004-4597-8662-549BA9EFDE98}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{4796FD31-2004-4597-8662-549BA9EFDE98}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{4796FD31-2004-4597-8662-549BA9EFDE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4796FD31-2004-4597-8662-549BA9EFDE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{822D066C-CB2F-43E1-9B84-7D426A31C24C}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{822D066C-CB2F-43E1-9B84-7D426A31C24C}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{822D066C-CB2F-43E1-9B84-7D426A31C24C}.Debug|Any CPU.Deploy.0 = Release|Any CPU
+		{822D066C-CB2F-43E1-9B84-7D426A31C24C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{822D066C-CB2F-43E1-9B84-7D426A31C24C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+EndGlobal

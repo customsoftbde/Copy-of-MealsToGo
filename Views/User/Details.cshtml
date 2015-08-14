@@ -1,0 +1,314 @@
+﻿@model MealsToGo.ViewModels.UserDetailViewModel
+
+@{
+    ViewBag.Title = "User Information";
+}
+
+<div class="cont-main">
+    <h1>User Information</h1>
+    <div class="cont-main">
+        <div class="se-reslt">
+            <div class="se-reslt2">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td align="center">
+                            @if (!string.IsNullOrEmpty(Model.Photo))
+                            {
+                               
+                                    <img src="~/ProfilePhotos/@(Model.Photo)" width="200", height="150"  />
+                            }
+                            </td>
+                    </tr>
+                    @*<tr>
+                        <td height="40" align="center" class="normal-14"><strong> @Html.ActionLink("Edit", "Edit", "User", routeValues: new { userid = Model.UserId }, htmlAttributes: new { @class = "menu-14u" })</strong></td>
+                    </tr>*@
+                </table>
+                   
+
+            </div>
+        </div>
+        <div class="cont-rit">
+            <ul class="gen-form">
+                <li>
+                    <p>First Name</p>
+                    <span class="normal-14"> @Html.DisplayFor(model => model.FirstName, new { @class = "gen-ftb" })</span></li>
+                <li>
+                    <p>Last Name</p>
+                    <span class="normal-14"> @Html.DisplayFor(model => model.LastName, new { @class = "gen-ftb" })</span></li>
+                 <li>
+                    <p>Address 1</p>
+                    @Html.DisplayFor(model => model.Address.Address1, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Address 2</p>
+                    @Html.DisplayFor(model => model.Address.Address2, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>City</p>
+                    @Html.DisplayFor(model => model.Address.City, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Zip</p>
+                    @Html.DisplayFor(model => model.Address.Zip, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Country</p>
+                    @Html.DisplayFor(model => model.Address.CountryName, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Province</p>
+                    @Html.DisplayFor(model => model.Address.Province, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Telephone</p>
+                    @Html.DisplayFor(model => model.Address.Telephone, new { @class = "gen-ftb" })
+                </li>
+
+               @* <li>
+                    <p>Check if you wish to Advertise Food?</p>
+                    @Html.CheckBoxFor(model => model.CheckIfSeller)
+
+                <li>*@
+                <li>
+                    <p>Kitchen Type</p>
+
+                    @Html.DisplayFor(model => model.KitchenType, new { @class = "gen-ftb" })
+
+                </li>
+                <li>
+                    <p>Kitchen Name</p>
+                    @Html.DisplayFor(model => model.KitchenName, new { @class = "gen-ftb" })
+                    @Html.ValidationMessageFor(model => model.PassportNumber)
+                </li>
+                <li>
+                    <p>Mobile</p>
+                    @Html.DisplayFor(model => model.Mobile, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>SkypeID</p>
+                    @Html.DisplayFor(model => model.SkypeID, new { @class = "gen-ftb" })
+                </li>
+                 <li>
+
+                    <a href="#" class="menu-14u ">@Html.ActionLink("Back to List", "Index",null,new { @class = "menu-14u" })</a></li>
+
+            </ul>
+
+        </div>
+        <div class="clr"></div>
+
+    </div>
+    @*<div class="cont">
+        <div class="cont-rit">
+
+            <ul class="gen-form">
+                <li>
+                    <a href="#" class="menu-14u">
+                        @Html.ActionLink("Edit", "Edit", "User", routeValues: new { userid = Model.UserId }, htmlAttributes: new { @class = "menu-14u" })
+                @if (!string.IsNullOrEmpty(Model.Photo))
+                {
+                    <li>
+                        <p>Photo</p>
+                        <img src="~/ProfilePhotos/@(Model.Photo)" width="200", height="150"  />
+                    </li>
+                }
+                <li>
+                    <p>First Name</p>
+                    @Html.DisplayFor(model => model.FirstName, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Last Name</p>
+                    @Html.DisplayFor(model => model.LastName, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Address 1</p>
+                    @Html.DisplayFor(model => model.Address.Address1, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Address 2</p>
+                    @Html.DisplayFor(model => model.Address.Address2, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>City</p>
+                    @Html.DisplayFor(model => model.Address.City, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Zip</p>
+                    @Html.DisplayFor(model => model.Address.Zip, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Country</p>
+                    @Html.DisplayFor(model => model.Address.Country, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Province</p>
+                    @Html.DisplayFor(model => model.Address.Province, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Telephone</p>
+                    @Html.DisplayFor(model => model.Address.Telephone, new { @class = "gen-ftb" })
+                </li>
+
+                <li>
+                    <p>Check if you wish to Advertise Food?</p>
+                    @Html.CheckBoxFor(model => model.CheckIfSeller)
+
+                <li>
+                <li>
+                    <p>Kitchen Type</p>
+
+                    @Html.DisplayFor(model => model.KitchenType, new { @class = "gen-ftb" })
+
+                </li>
+                <li>
+                    <p>Kitchen Name</p>
+                    @Html.EditorFor(model => model.KitchenName, new { @class = "gen-ftb" })
+                    @Html.ValidationMessageFor(model => model.PassportNumber)
+                </li>
+                <li>
+                    <p>Mobile</p>
+                    @Html.DisplayFor(model => model.Mobile, new { @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>SkypeID</p>
+                    @Html.DisplayFor(model => model.SkypeID, new { @class = "gen-ftb" })
+                </li>
+                <li>
+
+                    <a href="#" class="menu-14u">@Html.ActionLink("Back to List", "Index")</a></li>
+
+            </ul>
+            <div class="clr"></div>
+
+        </div>
+        <div class="clr"></div>
+
+    </div>*@
+
+</div>
+@*<table>
+    <tr>
+        <td colspan="2">
+            <img src="~/ProfilePhotos/@(Model.Photo)" width="200", height="150"  />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.FirstName)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.LastName)
+        </td>
+
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Address1)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Address1)
+        </td>
+
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Address2)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => Model.Address2)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.City)
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Province)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Province)
+        </td>
+
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Zip)
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.CountryLKUP.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.CountryLKUP.Country)
+        </td>
+
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Telephone)
+        </td>
+
+    </tr>
+
+
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.DateCreated)
+        </td>
+
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => Model.DateUpdated)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.UserStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.UserStatus)
+        </td>
+
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+
+
+</table>*@

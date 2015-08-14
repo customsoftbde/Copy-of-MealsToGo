@@ -1,0 +1,96 @@
+﻿@model MealsToGo.Models.Order
+
+@{
+    ViewBag.Title = "Create";
+    Model.EstimatedPickupTime = DateTime.Now;
+    Model.ActualPickUpTime = DateTime.Now;
+    Model.DateCreated = DateTime.Now;
+    Model.DateUpdated = DateTime.Now;
+    Model.Status = 1;
+    Model.UserId = WebSecurity.CurrentUserId;
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+
+    <fieldset>
+        <legend>Order</legend>
+
+        @Html.HiddenFor(model => model.UserId)
+         @Html.HiddenFor(model => model.MealAdID)
+        @Html.HiddenFor(model => model.DateUpdated)
+         @Html.HiddenFor(model => model.DateCreated)
+          @Html.HiddenFor(model => model.Status)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.QuantityOrdered)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.QuantityOrdered)
+            @Html.ValidationMessageFor(model => model.QuantityOrdered)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EstimatedPickupTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EstimatedPickupTime)
+            @Html.ValidationMessageFor(model => model.EstimatedPickupTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActualPickUpTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ActualPickUpTime)
+            @Html.ValidationMessageFor(model => model.ActualPickUpTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeedbackOnQuality)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeedbackOnQuality)
+            @Html.ValidationMessageFor(model => model.FeedbackOnQuality)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeedbackOnTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeedbackOnTime)
+            @Html.ValidationMessageFor(model => model.FeedbackOnTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeedbackOnPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeedbackOnPrice)
+            @Html.ValidationMessageFor(model => model.FeedbackOnPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GeneralFeedback)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GeneralFeedback)
+            @Html.ValidationMessageFor(model => model.GeneralFeedback)
+        </div>
+
+        
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "menu-14u" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

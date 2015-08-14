@@ -1,0 +1,69 @@
+﻿@model MealsToGo.Models.SearchParam
+@{
+ Layout = "~/Views/Shared/_Layout.cshtml";
+ }
+
+@using (Html.BeginForm("LocationToSearch", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        @Html.ValidationSummary(false,"", new { @class = "error" })
+
+    <div class="cont-main">
+  <h1>Find Food Near You</h1>
+  <div class="cont">
+    <div class="cont-rit">
+<ul class="gen-form">
+      <li>
+        @Html.TextBox("address",null,new { @class = "gen-ftb"  , placeholder = "10011 or 123 Baker St,Elkhorn,MA  "})
+        @*<input name="" type="text" class="gen-ftb"/>*@<span>Enter your location, zipcode will do but full address will be awesome!</span></li>
+      <li>
+        
+        @*<input name="" type="text" class="gen-ftb"/>*@
+          @Html.TextBox("food",null,new {placeholder = "Pizza,burrito etc ", @class = "gen-ftb" })
+          <span>Have something definite in mind? ask away! Not sure? Leave as is!</span></li>
+
+      
+      <li>
+        <label>
+        <input type="submit" name="button2" id="button2" value="Go" class="submit" /> 
+        </label>
+      </li>
+      <div class="clr"></div>
+    </ul>
+    
+
+</div>
+<div class="clr"></div>
+  
+  </div>
+
+</div>
+
+    @*<div class="cont-main">
+  <h1>Find Food Near You</h1>
+  <div class="cont">
+      @Html.TextBox("address",null,new { style="width:150px" , placeholder = "10011 or 123 Baker St,Elkhorn,MA  ", @class = "zip-code" })
+      @Html.Label("Enter your location, zipcode will do but full address will be awesome!")
+      <br />
+     
+      @Html.TextBox("food",null,new { style="width:150px" , placeholder = "Pizza,burrito etc ", @class = "food-tb" })
+        @Html.Label("Have something definite in mind? ask away! Not sure? Leave it as it is! ")
+     
+      <br />
+    
+       <input name="button" type="submit" class="go" id="button" value="GO" />
+    
+   
+      
+        
+      
+   
+         
+  </div>
+
+</div>*@
+}
+
+ @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+ 

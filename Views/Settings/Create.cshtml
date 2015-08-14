@@ -1,0 +1,133 @@
+﻿@model MealsToGo.Models.UserSetting
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+    <div class="cont-main">
+        <h1>Meal Item - Create</h1>
+
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>@Html.LabelFor(model => model.UserSettingsID)</p>
+                        @Html.EditorFor(model => model.UserSettingsID, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.UserSettingsID)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.UserID)</p>
+                        @Html.EditorFor(model => model.UserID, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.UserID)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.ActivityTypeID)</p>
+                        @Html.EditorFor(model => model.ActivityTypeID, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.ActivityTypeID)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.ReceiveEmailNotification)</p>
+                        @Html.EditorFor(model => model.ReceiveEmailNotification, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.ReceiveEmailNotification)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.ReceiveMobileTextNotification)</p>
+                        @Html.EditorFor(model => model.ReceiveMobileTextNotification, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.ReceiveMobileTextNotification)
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(model => model.NotificationFrequency)</p>
+                        @Html.EditorFor(model => model.NotificationFrequency, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.NotificationFrequency)
+                    </li>
+                    <li>
+                        <label>
+                            <input type="submit" name="button2" id="button2" value="Create" class="submit" />
+                        </label>
+
+                        @*@Html.ActionLink("Back to List", "Index", new { @class = "menu-14u" })*@
+                        @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                    </li>
+                    <div class="clr"></div>
+                </ul>
+            </div>
+            <div class="clr"></div>
+        </div>
+    </div>
+@*<fieldset>
+        <legend>UserSetting</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserSettingsID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserSettingsID)
+            @Html.ValidationMessageFor(model => model.UserSettingsID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserID)
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActivityTypeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ActivityTypeID)
+            @Html.ValidationMessageFor(model => model.ActivityTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PrivacySettingsID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PrivacySettingsID)
+            @Html.ValidationMessageFor(model => model.PrivacySettingsID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReceiveEmailNotification)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReceiveEmailNotification)
+            @Html.ValidationMessageFor(model => model.ReceiveEmailNotification)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReceiveMobileTextNotification)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReceiveMobileTextNotification)
+            @Html.ValidationMessageFor(model => model.ReceiveMobileTextNotification)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NotificationFrequency)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NotificationFrequency)
+            @Html.ValidationMessageFor(model => model.NotificationFrequency)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>*@
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

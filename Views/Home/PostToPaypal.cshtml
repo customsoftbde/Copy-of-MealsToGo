@@ -1,0 +1,49 @@
+﻿@model MealsToGo.Models.Paypal
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    @*<script src="~/Scripts/jquery-1.8.2.js"></script>*@
+</head>
+<body>
+    <form id="frm" action="@ViewBag.actionURL" method="post">
+        @Html.HiddenFor(model => model.cmd)
+        @Html.HiddenFor(model => model.business)
+        @Html.HiddenFor(model => model.no_shipping)
+        @Html.HiddenFor(model => model.@return)
+        @Html.HiddenFor(model => model.cancel_return)
+        @Html.HiddenFor(model => model.notify_url)
+        @Html.HiddenFor(model => model.currency_code)
+        @Html.Hidden("upload", Model.PaypalItems.Count)
+        @foreach (var item in Model.PaypalItems)
+        {
+            @Html.Hidden("item_name_" + (Model.PaypalItems.IndexOf(item) + 1).ToString(), item.item_name)
+            @Html.Hidden("amount_" + (Model.PaypalItems.IndexOf(item) + 1).ToString(), item.amount)
+            @Html.Hidden("Quantity_" + (Model.PaypalItems.IndexOf(item) + 1).ToString(), item.Quantity)
+        }
+       @* @Html.Hidden("item_name", item.item_name)
+        @Html.Hidden("amount", item.amount)
+        @Html.Hidden("Quantity", item.Quantity)*@
+        @Html.HiddenFor(model => model.cmd)
+        <input type="hidden" name="upload" value="1">
+    </form>
+
+    <p style="text-align: center">
+        <h4>Redirecting to Paypal....</h4>
+    </p>
+</body>
+</html>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        //$('input[type="hidden"]').each(function (index, item) {
+        //    //$(this).removeAttr('name');
+        //    //$(this).prop('name', $(this).attr('id'));
+        //});
+        var frm = $("form");
+        frm.submit();
+    });
+
+</script>

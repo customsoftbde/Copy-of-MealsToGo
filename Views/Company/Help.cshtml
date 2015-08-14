@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Help";
+}
+@{
+    if (Request.IsAuthenticated)
+    {
+     Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+    else
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+}
+<div class="cont-main">
+    <style>
+        * {
+            box-sizing:inherit !important;
+        }
+        .h3, h3 {
+            font-size: 16px !important;
+        }
+        .cont h4 {
+            padding:0 !important;
+            margin:0 !important;
+            background:none;
+        }
+
+    </style>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <h1>Contact</h1>
+  <div class="cont">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          How do I use funfooding.com?
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                      Sign up and enter your address or zipcode and we'll show you all the places to eat near you. You can then place your order online or by phone.
+                  </div>
+              </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                  <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          How do I order online?
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="panel-body">
+                      Choose from our network of providers that take online orders and select the items you'd like to order with a click. It will be added to your food cart. Once you are done selecting the items, click on "check out" and follow the instructions from there.
+                  </div>
+              </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Where is my food?
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body">
+                      Check the status of your current order here.
+                  </div>
+              </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFour">
+                  <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                          Can I change my order after I place it?
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                  <div class="panel-body">
+                      Maybe. If you placed your order in the last five minutes, you can click here to submit a change request. Call the provided contact number first to make sure they have not started working on your order.
+                  </div>
+              </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFive">
+                  <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                          Did my order go through?
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                  <div class="panel-body">
+                      Check the status of your current order here.
+                  </div>
+              </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingSix">
+                  <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                          Does it cost anything extra?
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                  <div class="panel-body">
+                      Nope. It is free to use our website to place phone and online orders. We don't add any fees to the buyer.
+                  </div>
+              </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingSeven">
+                  <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                          Can I order catering through Funfooding?
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                  <div class="panel-body">
+                      You sure can. Its like ordering any meal from a seller for a future date and time.
+                  </div>
+              </div>
+          </div>
+
+          <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingEight">
+                  <h4 class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                          I have a question that I dont find here.
+                      </a>
+                  </h4>
+              </div>
+              <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                  <div class="panel-body">
+                      Please <a href="#">Contact</a> us and we will help you.
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+  @*<h3><a href="#help1">How do I use funfooding.com?</a></h3>
+  <h3><a href="#help2">How do I order online?</a></h3>
+  <h3><a href="#help3">Where is my food?</a></h3>
+  <h3><a href="#help4">Can I change my order after I place it?</a></h3>
+  <h3><a href="#help5">Did my order go through?</a></h3>
+  <h3><a href="#help6">Does it cost anything extra?</a></h3>
+  <h3><a href="#help7">Can I order catering through Funfooding?</a></h3>
+  <h3><a href="#help7">I have a question that I dont find here.</a>  </h3>
+  <h4><a name="help1" id="help1"></a>How do I use Funfooding.com?</h4>
+  <p>Sign up and enter your address or zipcode and we'll show you all the places to eat near you. You can then place your order online or by phone.</p>
+  
+  <h4><a name="help2" id="help2"></a>How do I order online?</h4>
+  <p>Choose from our network of providers that take online orders and select the items you'd like to order with a click. It will be added to your food cart. Once you are done selecting the items, click on "check out" and follow the instructions from there.</p>
+  
+  <h4><a name="help3" id="help3"></a>Where is my food?</h4>
+  <p>Check the status of your current order here.</p>
+  
+  <h4><a name="help4" id="help4"></a>Can I change my order after I place it?</h4>
+  <p>Maybe. If you placed your order in the last five minutes, you can click here to submit a change request. Call the provided contact number first to make sure they have not started working on your order.</p>
+  
+  <h4><a name="help5" id="help5"></a>Did my order go through?</h4>
+  <p>Check the status of your current order here.</p>
+  
+  <h4><a name="help6" id="help6"></a>Does it cost anything extra?</h4>
+  <p>Nope. It is free to use our website to place phone and online orders. We don't add any fees to the buyer.</p>
+  
+  <h4><a name="help7" id="help7"></a>Can I order catering through Funfooding?</h4>
+  <p>You sure can. Its like ordering any meal from a seller for a future date and time.
+   <h4><a name="help8" id="help8"></a>I have a question that I dont find here.</h4>
+  <p>Please <a href="#">Contact</a> us and we will help you.</p>*@
+  
+  
+  </div>
+
+</div>
+
+

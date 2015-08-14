@@ -1,0 +1,212 @@
+﻿@model MealsToGo.ViewModels.LoginRegisterViewModel
+
+@{
+    //Layout = "~/Views/Shared/_IndexLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function lettersOnly(evt) {
+        evt = (evt) ? evt : event;
+        var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+      ((evt.which) ? evt.which : 0));
+        if (charCode == 32 || charCode == 46 || evt.keyCode == 37 || evt.keyCode == 39)
+            return true;
+        if (charCode > 31 && (charCode < 65 || charCode > 90) &&
+      (charCode < 97 || charCode > 122)) {
+            return false;
+        }
+        else
+            return true;
+    }
+</script>
+
+
+<div class="banner">
+    <div class="banner-blk">
+        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = Request.QueryString["ReturnUrl"] }))
+        {
+            @Html.AntiForgeryToken()
+            <span class="normal14">
+                    @Html.ValidationSummary(false, "", new { @class = "error" })
+                </span>
+            <div class="signup">
+                <h1>Sign Up <span>Its quick and its free!</span></h1>
+                <ul class="sign-form">
+                     <li>
+                        <p>First Name</p>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "sig-form", placeholder = "Your First Name", onkeypress = "return lettersOnly(event)" })
+                        @*@Html.ValidationMessageFor(m => m.FirstName)*@
+                        @*<input name="" type="text" class="sig-form"/>*@
+
+
+                    </li>
+                    <li>
+                        <p>Email Address</p>
+                       @Html.TextBoxFor(m => m.UserName, new { @class = "sig-form", placeholder = "User Name" })
+                        @*@Html.ValidationMessageFor(m => m.UserName)*@
+                        @*<input name="" type="text" class="sig-form"/>*@
+
+
+                    </li>
+                    <li>
+                        <p>Password</p>
+                        @*<input name="" type="password" class="sig-form" />*@
+                        @Html.PasswordFor(m => m.Password, new { @class = "sig-form", placeholder = "Password" })
+                        @*@Html.ValidationMessageFor(m => m.Password)*@
+
+                    </li>
+                    @*<li style="display:none">                        
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "sig-form"})                       
+                    </li>*@
+                    <li>
+                        
+                        <input type="Submit" name="submit" src="~/Content/images/index4_46.png" value="Sign Up" border="0" alt="Submit" class="submit" style="margin-left:136px" />
+                       
+                        
+                    </li>
+                    <li>
+                        <label class="agree">
+
+                            <span class="normal14" style="font-size:13px;">
+                                By clicking Sign Up, you agree to
+                                our
+
+                                (<a href="#" class="menu-14u">Terms</a>) and (<a href="#" class="menu-14u
+">Conditions</a>).
+                            </span>
+                        </label>
+                        @*<input type="image" name="submit" src="~/Content/images/index4_46.png" border="0" alt="Submit" class="singup" />*@
+
+                       
+                        
+                        @*<a href="#">
+                        <img src="~/Content/images/index4_46.png" border="0" class="singup" /></a>*@</li>
+                </ul>
+               
+            </div>
+            
+            
+            
+            <div class="see-mobi ">
+                <h2>See you on (<a href="#">Mobile</a>)</h2>
+                <img src="~/Content/images/mobile.png" width="269" height="298" />
+                 
+            </div>
+            <div class="clr"></div>
+        }
+    </div>
+</div>
+
+
+@*<div class="banner">
+    <div class="banner-blk">
+        @using (Html.BeginForm("Register", "Account", new { ReturnUrl = Request.QueryString["ReturnUrl"] }))
+        {
+            @Html.AntiForgeryToken()
+            <span class="normal14">
+                @Html.ValidationSummary(false,"", new { @class = "error" })</span>
+
+                   
+            <div class="signup">
+                <h1>Sign Up <span>Its quick and its free!</span></h1>
+                <ul class="sign-form">
+                    <li>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "sig-form", placeholder = "Your First Name" })
+                        @Html.ValidationMessageFor(m => m.FirstName)</li>
+                    <li>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "sig-form", placeholder = "Your Email" })
+                        @Html.ValidationMessageFor(m => m.UserName)</li>
+                    <li>
+                        @Html.PasswordFor(m => m.Password, new { @class = "sig-form", placeholder = "Enter Password" })
+                        @Html.ValidationMessageFor(m => m.Password)</li>
+                    <li>
+                        <label class="agree">
+
+                            <span class="normal14">By clicking Sign Up, you agree to 
+our<br />
+                                <a href="#" class="menu-14u">Terms</a> and <a href="#" class="menu-14u
+">Policies</a>.    
+
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="image" name="submit" src="~/Content/images/signup.png" border="0" alt="Submit" class="singup" />
+
+                    </li>
+
+
+
+
+                </ul>
+            </div>
+        }
+
+        <div class="see-mobi">
+            <h1>See you on <span>(<a href="#">Mobile</a>)</span></h1>
+            <img src="~/Content/images/mobile.png" class="r" />
+        </div>
+
+
+        <div class="clr"></div>
+    </div>
+</div>*@
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@*---------------------------------------------------------------------------------------------------------
+@model MealsToGo.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+
+
+@using (Html.BeginForm(new { ReturnUrl =  Request.QueryString["ReturnUrl"] })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+
+     
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li><a href=#use>
+              
+                @Html.TextBoxFor(m => m.UserName, new { style="width:300px",placeholder = "Your Email" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li><a href=#use>
+              
+                @Html.PasswordFor(m => m.Password,new { style="width:300px",placeholder = "Your Password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li><a href=#use>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox", @checked = "checked" } )
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+---------------------------------------------
+**/*@

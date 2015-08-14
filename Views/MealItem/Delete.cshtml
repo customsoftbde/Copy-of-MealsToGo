@@ -1,0 +1,95 @@
+﻿@model MealsToGo.Models.MealItem
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>MealItem</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserDetail.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MealItemName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MealItemName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ingredients)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ingredients)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Photo1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Photo1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Photo2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Photo2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PortionByVolume)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PortionByVolume)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateUpdated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LKUPCuisineType.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LKUPCuisineType.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MealTypeLKUP.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MealTypeLKUP.Name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

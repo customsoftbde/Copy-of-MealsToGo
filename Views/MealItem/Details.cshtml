@@ -1,0 +1,237 @@
+﻿@model MealsToGo.Models.MealItem
+
+@{
+    ViewBag.Title = "Meal Item - Details";
+}
+<style type="text/css">
+    .stepcarousel {
+        position: relative; /*leave this value alone*/
+        border: 1px solid #616161;
+        overflow: scroll; /*leave this value alone*/
+        width: 350px; /*Width of Carousel Viewer itself*/
+        height: 250px; /*Height should enough to fit largest content's height*/
+    }
+
+        .stepcarousel .belt {
+            position: absolute; /*leave this value alone*/
+            left: 0;
+            top: 0;
+        }
+
+        .stepcarousel .panel {
+            float: left; /*leave this value alone*/
+            overflow: hidden; /*clip content that go outside dimensions of holding panel DIV*/
+            margin: 0px; /*margin around each panel*/
+            width: 350px; /*Width of each panel holding each content. If removed, widths should be individually defined on each content DIV then. */
+        }
+</style>
+<script type="text/javascript" src="~/Scripts/stepcarousel.js"></script>
+<div class="cont-main">
+    <h1>Meal Item - Details</h1>
+
+    <div class="cont">
+        <div class="cont-rit">
+            <ul class="gen-form">
+                <li>
+                    <p>Name of Food</p>
+
+                    @Html.DisplayFor(model => model.MealItemName, new { placeholder = "Pizza,sandwich,kebab...", @class = "gen-ftb" })
+                </li>
+                <li>
+                    <p>Ingredients</p>
+                    @Html.DisplayFor(model => model.Ingredients)
+
+                </li>
+                <li>
+                    <p>Diet Type</p>
+                    @*@Html.Display((ViewData["MealItemViewModel"] as MealsToGo.ViewModels.MealItemViewModel).DietTypeDD.DietTypeDDList.FirstOrDefault(x=>x.Selected).Text)*@
+                    @Html.DisplayFor(x => x.LKUPDietType.Name)
+                </li>
+                <li>
+                    <p>Meal Type</p>
+                    @Html.DisplayFor(model => model.LKUPMealType.Description)
+
+
+
+                </li>
+                <li>
+                    <p>Cuisine Type</p>
+                    @Html.DisplayFor(x => x.LKUPCuisineType.Description)
+                </li>
+                <li>
+                    <p>Serving Unit</p>
+                    @Html.DisplayFor(x => x.LKUPServingUnit.ServingUnit)
+
+                </li>
+                <li>
+                    <p>Quantity</p>
+                    @Html.DisplayFor(model => model.Quantity)
+
+                </li>
+
+                <li>
+                    <p>Allergens(If Any)</p>
+                    @Html.Display(String.Join(", ", (ViewData["MealItemViewModel"] as MealsToGo.ViewModels.MealItemViewModel).AllergenDD.Where(x => x.Selected).Select(x => x.AllergenName).ToList()))
+
+                </li>
+                <li>
+                    <p>Date Created</p>
+                    @Html.DisplayFor(model => model.DateCreated)
+                </li>
+                <li>
+                    <p>Updated Date</p>
+                    @Html.DisplayFor(model => model.DateUpdated)
+                </li>
+                @if (Model.MealItems_Photos.Count > 0)
+                {
+                    <li>
+                        <p>Photo(s)</p>
+                        <div id="mygallery" class="stepcarousel">
+                            <div class="belt">
+                                @foreach (var photo in Model.MealItems_Photos)
+                                {
+                                    <div class="panel">
+
+
+                                        <img src="~/MealPhotos/@photo.Photo.Split('\\')[@photo.Photo.Split('\\').Length - 1]" />
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @*<table width="40%" border="1" cellpadding="0" cellspacing="0" bordercolor="#c6c3c3" style="border-collapse: collapse; float: left;">
+                           
+                            @foreach (var photo in Model.MealItems_Photos)
+                            {
+                                var arrayfileName = photo.Photo.Split('\\');
+                                var fileName = arrayfileName[arrayfileName.Length - 1];
+                                <tr>
+                                    <td class="normal-14">
+                                        <img src="~/MealPhotos/@(fileName)"  height="250px"  width="300px" />
+                                    </td>
+                                </tr>
+                            }
+                        </table>*@
+                    </li>
+                }
+                <li>
+                    <p>Price</p>
+                    @Html.DisplayFor(model => model.Price)
+
+                </li>
+                <li>
+                    <p>Status</p>
+                    @if (Model.Status == 1)
+                    {
+                        @Html.Label("Active")
+                    }
+                    else if (Model.Status == 2)
+                    {
+                        @Html.Label("Inactive")
+                    }
+                    else
+                    {
+                        @Html.Label("")
+                    }
+
+                </li>
+                <li>
+                    @*<label>
+                            <input type="submit" name="button2" id="button2" value="Create" class="submit" />
+                        </label>*@
+                    @if (Model.Quantity > 0)
+                    {
+                        @Html.ActionLink("Add to cart |", "AddtoCartMealItem", "Home", new { mealItemId = Model.MealItemId, qty = 1, itemName = Model.MealItemName, price = Model.Price, userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                    }
+                    @Html.ActionLink("Meal Ads", "Index", "MealAd", routeValues: new { mealitemid = Model.MealItemId, userid = WebSecurity.CurrentUserId }, htmlAttributes: new { @class = "menu-14u" }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.MealItemId }, new { @class = "menu-14u" }) |
+                    @*@Html.ActionLink("Back to List", "Index", routeValues: new { userID = WebSecurity.CurrentUserId })*@
+                    @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+
+                </li>
+                <div class="clr"></div>
+            </ul>
+
+
+        </div>
+        <div class="clr"></div>
+
+    </div>
+
+</div>
+@*<fieldset>
+    <legend>MealItem</legend>
+
+       <div class="display-label">
+         @Html.DisplayNameFor(model => model.MealItemName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MealItemName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ingredients)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ingredients)
+    </div>
+
+   
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Quantity)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Quantity)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateUpdated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CusineTypeDD.SelectedCuisine)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CusineTypeDD.SelectedCuisine)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MealTypeDD.SelectedMealType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model =>model.MealTypeDD.SelectedMealType)
+    </div>
+</fieldset>*@
+
+<script type="text/javascript">
+
+    stepcarousel.setup({
+        galleryid: 'mygallery', //id of carousel DIV
+        beltclass: 'belt', //class of inner "belt" DIV containing all the panel DIVs
+        panelclass: 'panel', //class of panel DIVs each holding content
+        autostep: { enable: true, moveby: 1, pause: 3000 },
+        panelbehavior: { speed: 500, wraparound: false, persist: true },
+        defaultbuttons: { enable: true, moveby: 1, leftnav: ['/Content/images/prev.png', -20, 110], rightnav: ['/Content/images/next.png', -20, 110] },
+        statusvars: ['statusA', 'statusB', 'statusC'], //register 3 variables that contain current panel (start), current panel (last), and total panels
+        contenttype: ['inline'] //content setting ['inline'] or ['external', 'path_to_external_file']
+    })
+
+</script>

@@ -1,0 +1,26 @@
+﻿@using MealsToGo.Models;
+@{
+    ViewBag.Title = "Show Demo";
+
+    int UserID = ViewBag.UserId;
+
+    SearchParam searchparam = new SearchParam();
+    searchparam.UserID=UserID;
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+<div>
+
+    @Html.ActionLink("Invite Your Connections", "InviteYourConnections", "User", routeValues: new { userID = UserID }, htmlAttributes: null)
+
+    <br />
+
+    @Html.ActionLink("Search Meals", "Index", "Home", new RouteValueDictionary(searchparam), htmlAttributes: null)
+
+     <br />
+   @Html.ActionLink("Add Meals", "Index", "MealItem", routeValues: new { userID = UserID }, htmlAttributes: null)
+
+</div>

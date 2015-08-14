@@ -1,0 +1,38 @@
+﻿@model MealsToGo.Models.RegisterModel
+@{
+    ViewBag.Title = "Sign Up";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+   
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li><a href=#use>
+
+                @Html.TextBoxFor(m => m.UserName,new { style="width:300px",placeholder = "Your Email" })
+            </li>
+           
+            <li><a href=#use>
+          
+                @Html.PasswordFor(m => m.Password,new { style="width:300px",placeholder = "New Password" })
+            </li>
+            @*<li><a href=#use>
+               
+                @Html.PasswordFor(m => m.ConfirmPassword,new { style="width:300px",placeholder = "Confirm Password" })
+            </li>*@
+        </ol>
+        <input type="submit" value="Sign Up" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

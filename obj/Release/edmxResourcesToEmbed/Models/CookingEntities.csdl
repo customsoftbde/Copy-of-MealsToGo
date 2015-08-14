@@ -1,0 +1,1097 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ThreeSixtyTwoModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ThreeSixtyTwoEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="AddressLists" EntityType="ThreeSixtyTwoModel.AddressList" />
+    <EntitySet Name="AllEmails" EntityType="ThreeSixtyTwoModel.AllEmail" />
+    <EntitySet Name="Carts" EntityType="ThreeSixtyTwoModel.Cart" />
+    <EntitySet Name="Connections" EntityType="ThreeSixtyTwoModel.Connection" />
+    <EntitySet Name="countries" EntityType="ThreeSixtyTwoModel.country" />
+    <EntitySet Name="EmailSubscriptions" EntityType="ThreeSixtyTwoModel.EmailSubscription" />
+    <EntitySet Name="LKUPActivityTypes" EntityType="ThreeSixtyTwoModel.LKUPActivityType" />
+    <EntitySet Name="LKUPAssociationTypes" EntityType="ThreeSixtyTwoModel.LKUPAssociationType" />
+    <EntitySet Name="LKUPCountries" EntityType="ThreeSixtyTwoModel.LKUPCountry" />
+    <EntitySet Name="LKUPCuisineTypes" EntityType="ThreeSixtyTwoModel.LKUPCuisineType" />
+    <EntitySet Name="LKUPDietTypes" EntityType="ThreeSixtyTwoModel.LKUPDietType" />
+    <EntitySet Name="LKUPMealTypes" EntityType="ThreeSixtyTwoModel.LKUPMealType" />
+    <EntitySet Name="LKUPPrivacySettings" EntityType="ThreeSixtyTwoModel.LKUPPrivacySetting" />
+    <EntitySet Name="LKUPServingUnits" EntityType="ThreeSixtyTwoModel.LKUPServingUnit" />
+    <EntitySet Name="OrderDetails" EntityType="ThreeSixtyTwoModel.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="ThreeSixtyTwoModel.Order" />
+    <EntitySet Name="SendTexts" EntityType="ThreeSixtyTwoModel.SendText" />
+    <EntitySet Name="states" EntityType="ThreeSixtyTwoModel.state" />
+    <EntitySet Name="UserPaymentOptions" EntityType="ThreeSixtyTwoModel.UserPaymentOption" />
+    <AssociationSet Name="FK_UserAddressList_CountryLKUP" Association="ThreeSixtyTwoModel.FK_UserAddressList_CountryLKUP">
+      <End Role="LKUPCountry" EntitySet="LKUPCountries" />
+      <End Role="AddressList" EntitySet="AddressLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealOrderDetails_MealOrders" Association="ThreeSixtyTwoModel.FK_MealOrderDetails_MealOrders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <EntitySet Name="NotificationFrequencies" EntityType="ThreeSixtyTwoModel.NotificationFrequency" />
+    <EntitySet Name="UserSettings" EntityType="ThreeSixtyTwoModel.UserSetting" />
+    <AssociationSet Name="FK_UserSettings_LKUPActivityType" Association="ThreeSixtyTwoModel.FK_UserSettings_LKUPActivityType">
+      <End Role="LKUPActivityType" EntitySet="LKUPActivityTypes" />
+      <End Role="UserSetting" EntitySet="UserSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSettings_LKUPPrivacySettings" Association="ThreeSixtyTwoModel.FK_UserSettings_LKUPPrivacySettings">
+      <End Role="LKUPPrivacySetting" EntitySet="LKUPPrivacySettings" />
+      <End Role="UserSetting" EntitySet="UserSettings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSettings_NotificationFrequency" Association="ThreeSixtyTwoModel.FK_UserSettings_NotificationFrequency">
+      <End Role="NotificationFrequency" EntitySet="NotificationFrequencies" />
+      <End Role="UserSetting" EntitySet="UserSettings" />
+    </AssociationSet>
+    <EntitySet Name="LocationsSearcheds" EntityType="ThreeSixtyTwoModel.LocationsSearched" />
+    <EntitySet Name="MealItems_Photos" EntityType="ThreeSixtyTwoModel.MealItems_Photos" />
+    <EntitySet Name="LKUPAllergenicFoods" EntityType="ThreeSixtyTwoModel.LKUPAllergenicFood" />
+    <EntitySet Name="MealItems" EntityType="ThreeSixtyTwoModel.MealItem" />
+    <EntitySet Name="MealItems_AllergenicFoods" EntityType="ThreeSixtyTwoModel.MealItems_AllergenicFoods" />
+    <AssociationSet Name="FK_MealItems_AllergenicFoods_LKUPAllergenicFood" Association="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_LKUPAllergenicFood">
+      <End Role="LKUPAllergenicFood" EntitySet="LKUPAllergenicFoods" />
+      <End Role="MealItems_AllergenicFoods" EntitySet="MealItems_AllergenicFoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealItems_CuisineTypeLKUP" Association="ThreeSixtyTwoModel.FK_MealItems_CuisineTypeLKUP">
+      <End Role="LKUPCuisineType" EntitySet="LKUPCuisineTypes" />
+      <End Role="MealItem" EntitySet="MealItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealItems_LKUPDietType" Association="ThreeSixtyTwoModel.FK_MealItems_LKUPDietType">
+      <End Role="LKUPDietType" EntitySet="LKUPDietTypes" />
+      <End Role="MealItem" EntitySet="MealItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealItems_MealTypeLKUP" Association="ThreeSixtyTwoModel.FK_MealItems_MealTypeLKUP">
+      <End Role="LKUPMealType" EntitySet="LKUPMealTypes" />
+      <End Role="MealItem" EntitySet="MealItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealItems_LKUPServingUnit" Association="ThreeSixtyTwoModel.FK_MealItems_LKUPServingUnit">
+      <End Role="LKUPServingUnit" EntitySet="LKUPServingUnits" />
+      <End Role="MealItem" EntitySet="MealItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealItems_AllergenicFoods_MealItems" Association="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_MealItems">
+      <End Role="MealItem" EntitySet="MealItems" />
+      <End Role="MealItems_AllergenicFoods" EntitySet="MealItems_AllergenicFoods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealItems_Photos_MealItems" Association="ThreeSixtyTwoModel.FK_MealItems_Photos_MealItems">
+      <End Role="MealItem" EntitySet="MealItems" />
+      <End Role="MealItems_Photos" EntitySet="MealItems_Photos" />
+    </AssociationSet>
+    <EntitySet Name="webpages_Membership" EntityType="ThreeSixtyTwoModel.webpages_Membership" />
+    <EntitySet Name="TempOrderLists" EntityType="ThreeSixtyTwoModel.TempOrderList" />
+    <EntitySet Name="TempUserOrders" EntityType="ThreeSixtyTwoModel.TempUserOrder" />
+    <EntitySet Name="FunOrderDetails" EntityType="ThreeSixtyTwoModel.FunOrderDetail" />
+    <EntitySet Name="FunOrders" EntityType="ThreeSixtyTwoModel.FunOrder" />
+    <AssociationSet Name="FK_FunOrderDetails_FunOrders" Association="ThreeSixtyTwoModel.FK_FunOrderDetails_FunOrders">
+      <End Role="FunOrder" EntitySet="FunOrders" />
+      <End Role="FunOrderDetail" EntitySet="FunOrderDetails" />
+    </AssociationSet>
+    <EntitySet Name="SendEmails" EntityType="ThreeSixtyTwoModel.SendEmail" />
+    <EntitySet Name="ActiveMealAds" EntityType="ThreeSixtyTwoModel.ActiveMealAd" />
+    <EntitySet Name="LKUPKitchenTypes" EntityType="ThreeSixtyTwoModel.LKUPKitchenType" />
+    <EntitySet Name="UserDetails" EntityType="ThreeSixtyTwoModel.UserDetail" />
+    <AssociationSet Name="FK_UserDetails_AddressList" Association="ThreeSixtyTwoModel.FK_UserDetails_AddressList">
+      <End Role="AddressList" EntitySet="AddressLists" />
+      <End Role="UserDetail" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_AddressList1" Association="ThreeSixtyTwoModel.FK_UserDetails_AddressList1">
+      <End Role="AddressList" EntitySet="AddressLists" />
+      <End Role="UserDetail" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_KitchenType" Association="ThreeSixtyTwoModel.FK_UserDetails_KitchenType">
+      <End Role="LKUPKitchenType" EntitySet="LKUPKitchenTypes" />
+      <End Role="UserDetail" EntitySet="UserDetails" />
+    </AssociationSet>
+    <EntitySet Name="SellerDefaultSettings" EntityType="ThreeSixtyTwoModel.SellerDefaultSetting" />
+    <EntitySet Name="UserAgreements" EntityType="ThreeSixtyTwoModel.UserAgreement" />
+    <EntitySet Name="UserAgreementsAcceptanceDetails" EntityType="ThreeSixtyTwoModel.UserAgreementsAcceptanceDetail" />
+    <EntitySet Name="AvailabilityTypes" EntityType="ThreeSixtyTwoModel.AvailabilityType" />
+    <EntitySet Name="MealAds_PaymentOptions" EntityType="ThreeSixtyTwoModel.MealAds_PaymentOptions" />
+    <EntitySet Name="PaymentOptions" EntityType="ThreeSixtyTwoModel.PaymentOption" />
+    <AssociationSet Name="FK_MealAds_PaymentOptions_PaymentOptions" Association="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_PaymentOptions">
+      <End Role="PaymentOption" EntitySet="PaymentOptions" />
+      <End Role="MealAds_PaymentOptions" EntitySet="MealAds_PaymentOptions" />
+    </AssociationSet>
+    <EntitySet Name="LKUPDeliveryMethods" EntityType="ThreeSixtyTwoModel.LKUPDeliveryMethod" />
+    <EntitySet Name="MealAds_DeliveryMethods" EntityType="ThreeSixtyTwoModel.MealAds_DeliveryMethods" />
+    <AssociationSet Name="FK_MealAds_DeliveryMethods_LKUPDeliveryMethod" Association="ThreeSixtyTwoModel.FK_MealAds_DeliveryMethods_LKUPDeliveryMethod">
+      <End Role="LKUPDeliveryMethod" EntitySet="LKUPDeliveryMethods" />
+      <End Role="MealAds_DeliveryMethods" EntitySet="MealAds_DeliveryMethods" />
+    </AssociationSet>
+    <EntitySet Name="MealAds" EntityType="ThreeSixtyTwoModel.MealAd" />
+    <AssociationSet Name="FK_MealAds_AvailabilityTypes" Association="ThreeSixtyTwoModel.FK_MealAds_AvailabilityTypes">
+      <End Role="AvailabilityType" EntitySet="AvailabilityTypes" />
+      <End Role="MealAd" EntitySet="MealAds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cart_MealAds" Association="ThreeSixtyTwoModel.FK_Cart_MealAds">
+      <End Role="MealAd" EntitySet="MealAds" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealAds_DeliveryMethods_MealAds" Association="ThreeSixtyTwoModel.FK_MealAds_DeliveryMethods_MealAds">
+      <End Role="MealAd" EntitySet="MealAds" />
+      <End Role="MealAds_DeliveryMethods" EntitySet="MealAds_DeliveryMethods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealAds_MealItems" Association="ThreeSixtyTwoModel.FK_MealAds_MealItems">
+      <End Role="MealItem" EntitySet="MealItems" />
+      <End Role="MealAd" EntitySet="MealAds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealAds_MealItems1" Association="ThreeSixtyTwoModel.FK_MealAds_MealItems1">
+      <End Role="MealItem" EntitySet="MealItems" />
+      <End Role="MealAd" EntitySet="MealAds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MealAds_PaymentOptions_MealAds" Association="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_MealAds">
+      <End Role="MealAd" EntitySet="MealAds" />
+      <End Role="MealAds_PaymentOptions" EntitySet="MealAds_PaymentOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_MealAds" Association="ThreeSixtyTwoModel.FK_OrderDetails_MealAds">
+      <End Role="MealAd" EntitySet="MealAds" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <EntitySet Name="MealAd_Schedules" EntityType="ThreeSixtyTwoModel.MealAd_Schedules" />
+    <AssociationSet Name="FK_MealAd_Schedules_MealAds" Association="ThreeSixtyTwoModel.FK_MealAd_Schedules_MealAds">
+      <End Role="MealAd" EntitySet="MealAds" />
+      <End Role="MealAd_Schedules" EntitySet="MealAd_Schedules" />
+    </AssociationSet>
+    <EntitySet Name="ContactLists" EntityType="ThreeSixtyTwoModel.ContactList" />
+  </EntityContainer>
+  <EntityType Name="AddressList">
+    <Key>
+      <PropertyRef Name="AddressID" />
+    </Key>
+    <Property Type="Int32" Name="AddressID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Address1" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Province" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Zip" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Telephone" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="CountryID" Nullable="false" />
+    <Property Type="Int32" Name="IsBillingAddress" Nullable="false" />
+    <Property Type="Decimal" Name="Latitude" Precision="9" Scale="6" />
+    <Property Type="Decimal" Name="Longitude" Precision="9" Scale="6" />
+    <Property Type="String" Name="latlng" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LKUPCountry" Relationship="ThreeSixtyTwoModel.FK_UserAddressList_CountryLKUP" FromRole="AddressList" ToRole="LKUPCountry" />
+    <NavigationProperty Name="UserDetails" Relationship="ThreeSixtyTwoModel.FK_UserDetails_AddressList" FromRole="AddressList" ToRole="UserDetail" />
+    <NavigationProperty Name="UserDetails1" Relationship="ThreeSixtyTwoModel.FK_UserDetails_AddressList1" FromRole="AddressList" ToRole="UserDetail" />
+    <Property Type="Int32" Name="IsCurrent" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AllEmail">
+    <Key>
+      <PropertyRef Name="EmailID" />
+    </Key>
+    <Property Type="Int32" Name="EmailID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ToAddress" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FromAddress" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CCAddress" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BCCAddress" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmailSubject" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="EmailBodyText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="SendDate" Nullable="false" Precision="3" />
+    <Property Type="String" Name="EmailStatus" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Comment" MaxLength="300" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="RecordID" />
+    </Key>
+    <Property Type="Int32" Name="RecordID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CartID" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="MealAdID" Nullable="false" />
+    <Property Type="Int32" Name="Count" Nullable="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+    <NavigationProperty Name="MealAd" Relationship="ThreeSixtyTwoModel.FK_Cart_MealAds" FromRole="Cart" ToRole="MealAd" />
+  </EntityType>
+  <EntityType Name="Connection">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ContactEmail" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="Int32" Name="ContactID" />
+    <Property Type="String" Name="ContactEmail" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ContactStrength" />
+  </EntityType>
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="country_id" />
+    </Key>
+    <Property Type="Int32" Name="country_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="country_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="country_abbrev" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="EmailSubscription">
+    <Key>
+      <PropertyRef Name="EmailSubscriptionID" />
+      <PropertyRef Name="Sender" />
+      <PropertyRef Name="Recipient" />
+      <PropertyRef Name="ActivityTypeID" />
+    </Key>
+    <Property Type="Int32" Name="EmailSubscriptionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Sender" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Recipient" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ActivityTypeID" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LKUPActivityType">
+    <Key>
+      <PropertyRef Name="ActivityTypeLKUPID" />
+    </Key>
+    <Property Type="Int32" Name="ActivityTypeLKUPID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ActivityType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserSettings" Relationship="ThreeSixtyTwoModel.FK_UserSettings_LKUPActivityType" FromRole="LKUPActivityType" ToRole="UserSetting" />
+  </EntityType>
+  <EntityType Name="LKUPAssociationType">
+    <Key>
+      <PropertyRef Name="AssociationTypeID" />
+    </Key>
+    <Property Type="Int32" Name="AssociationTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="AssociationType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LKUPCountry">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Type="Int32" Name="CountryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Country" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Currency" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CurrencyAbbreviation" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="IdentificationType" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountryAbbr" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AddressLists" Relationship="ThreeSixtyTwoModel.FK_UserAddressList_CountryLKUP" FromRole="LKUPCountry" ToRole="AddressList" />
+  </EntityType>
+  <EntityType Name="LKUPCuisineType">
+    <Key>
+      <PropertyRef Name="CuisineTypeID" />
+    </Key>
+    <Property Type="Int32" Name="CuisineTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="CreatedById" />
+    <Property Type="Int32" Name="UpdatedById" />
+    <NavigationProperty Name="MealItems" Relationship="ThreeSixtyTwoModel.FK_MealItems_CuisineTypeLKUP" FromRole="LKUPCuisineType" ToRole="MealItem" />
+  </EntityType>
+  <EntityType Name="LKUPDietType">
+    <Key>
+      <PropertyRef Name="DietTypeID" />
+    </Key>
+    <Property Type="Int32" Name="DietTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="CreatedById" />
+    <Property Type="Int32" Name="UpdatedById" />
+    <NavigationProperty Name="MealItems" Relationship="ThreeSixtyTwoModel.FK_MealItems_LKUPDietType" FromRole="LKUPDietType" ToRole="MealItem" />
+  </EntityType>
+  <EntityType Name="LKUPMealType">
+    <Key>
+      <PropertyRef Name="MealTypeID" />
+    </Key>
+    <Property Type="Int32" Name="MealTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="CreatedById" />
+    <Property Type="Int32" Name="UpdatedById" />
+    <NavigationProperty Name="MealItems" Relationship="ThreeSixtyTwoModel.FK_MealItems_MealTypeLKUP" FromRole="LKUPMealType" ToRole="MealItem" />
+  </EntityType>
+  <EntityType Name="LKUPPrivacySetting">
+    <Key>
+      <PropertyRef Name="PrivacySettingsID" />
+    </Key>
+    <Property Type="Int32" Name="PrivacySettingsID" Nullable="false" />
+    <Property Type="String" Name="PrivacySettings" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserSettings" Relationship="ThreeSixtyTwoModel.FK_UserSettings_LKUPPrivacySettings" FromRole="LKUPPrivacySetting" ToRole="UserSetting" />
+  </EntityType>
+  <EntityType Name="LKUPServingUnit">
+    <Key>
+      <PropertyRef Name="ServingUnitID" />
+    </Key>
+    <Property Type="Int32" Name="ServingUnitID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ServingUnit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MealItems" Relationship="ThreeSixtyTwoModel.FK_MealItems_LKUPServingUnit" FromRole="LKUPServingUnit" ToRole="MealItem" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="MealAdID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Type="Int32" Name="MealAdID" Nullable="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Int32" Name="FeedbackOnQuality" />
+    <Property Type="Int32" Name="FeedbackOnPrice" />
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="ThreeSixtyTwoModel.FK_MealOrderDetails_MealOrders" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="MealAd" Relationship="ThreeSixtyTwoModel.FK_OrderDetails_MealAds" FromRole="OrderDetail" ToRole="MealAd" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="EstimatedPickupTime" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="ActualPickUpTime" Precision="3" />
+    <Property Type="Int32" Name="FeedbackOnTime" />
+    <Property Type="String" Name="GeneralFeedback" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="Int32" Name="OrderID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="PaymentOptionID" Nullable="false" />
+    <Property Type="Int32" Name="DeliveryMethodID" Nullable="false" />
+    <NavigationProperty Name="OrderDetails" Relationship="ThreeSixtyTwoModel.FK_MealOrderDetails_MealOrders" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="SendText">
+    <Key>
+      <PropertyRef Name="SendTextID" />
+      <PropertyRef Name="SenderPhone" />
+      <PropertyRef Name="RecipientPhone" />
+      <PropertyRef Name="Message" />
+      <PropertyRef Name="DeliveryTime" />
+      <PropertyRef Name="DeliveryMethod" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="SendDate" />
+    </Key>
+    <Property Type="Int32" Name="SendTextID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="SenderPhone" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RecipientPhone" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Message" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DeliveryTime" Nullable="false" Precision="3" />
+    <Property Type="String" Name="DeliveryMethod" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="SendDate" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="state">
+    <Key>
+      <PropertyRef Name="state_id" />
+    </Key>
+    <Property Type="Int32" Name="state_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="state_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="state_abbrev" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="countryid" />
+  </EntityType>
+  <EntityType Name="UserPaymentOption">
+    <Key>
+      <PropertyRef Name="PaymentOptionID" />
+    </Key>
+    <Property Type="Int32" Name="PaymentOptionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="PaymentType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="PaymentID" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_UserAddressList_CountryLKUP">
+    <End Type="ThreeSixtyTwoModel.LKUPCountry" Role="LKUPCountry" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.AddressList" Role="AddressList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPCountry">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="AddressList">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealOrderDetails_MealOrders">
+    <End Type="ThreeSixtyTwoModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NotificationFrequency">
+    <Key>
+      <PropertyRef Name="NotificationFrequencyID" />
+    </Key>
+    <Property Type="Int32" Name="NotificationFrequencyID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserSettings" Relationship="ThreeSixtyTwoModel.FK_UserSettings_NotificationFrequency" FromRole="NotificationFrequency" ToRole="UserSetting" />
+  </EntityType>
+  <EntityType Name="UserSetting">
+    <Key>
+      <PropertyRef Name="UserSettingsID" />
+    </Key>
+    <Property Type="Int32" Name="UserSettingsID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="Int32" Name="ActivityTypeID" Nullable="false" />
+    <Property Type="Int32" Name="PrivacySettingsID" Nullable="false" />
+    <Property Type="Int32" Name="ReceiveEmailNotification" Nullable="false" />
+    <Property Type="Int32" Name="ReceiveMobileTextNotification" Nullable="false" />
+    <Property Type="Int32" Name="NotificationFrequencyID" Nullable="false" />
+    <NavigationProperty Name="LKUPActivityType" Relationship="ThreeSixtyTwoModel.FK_UserSettings_LKUPActivityType" FromRole="UserSetting" ToRole="LKUPActivityType" />
+    <NavigationProperty Name="LKUPPrivacySetting" Relationship="ThreeSixtyTwoModel.FK_UserSettings_LKUPPrivacySettings" FromRole="UserSetting" ToRole="LKUPPrivacySetting" />
+    <NavigationProperty Name="NotificationFrequency" Relationship="ThreeSixtyTwoModel.FK_UserSettings_NotificationFrequency" FromRole="UserSetting" ToRole="NotificationFrequency" />
+    <Property Type="Int32" Name="Verified" />
+    <Property Type="DateTime" Name="VerificationDate" Precision="3" />
+  </EntityType>
+  <Association Name="FK_UserSettings_LKUPActivityType">
+    <End Type="ThreeSixtyTwoModel.LKUPActivityType" Role="LKUPActivityType" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.UserSetting" Role="UserSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPActivityType">
+        <PropertyRef Name="ActivityTypeLKUPID" />
+      </Principal>
+      <Dependent Role="UserSetting">
+        <PropertyRef Name="ActivityTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSettings_LKUPPrivacySettings">
+    <End Type="ThreeSixtyTwoModel.LKUPPrivacySetting" Role="LKUPPrivacySetting" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.UserSetting" Role="UserSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPPrivacySetting">
+        <PropertyRef Name="PrivacySettingsID" />
+      </Principal>
+      <Dependent Role="UserSetting">
+        <PropertyRef Name="PrivacySettingsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSettings_NotificationFrequency">
+    <End Type="ThreeSixtyTwoModel.NotificationFrequency" Role="NotificationFrequency" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.UserSetting" Role="UserSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotificationFrequency">
+        <PropertyRef Name="NotificationFrequencyID" />
+      </Principal>
+      <Dependent Role="UserSetting">
+        <PropertyRef Name="NotificationFrequencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LocationsSearched">
+    <Key>
+      <PropertyRef Name="SearchID" />
+    </Key>
+    <Property Type="Int32" Name="SearchID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Location" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Latitude" Nullable="false" Precision="9" Scale="6" />
+    <Property Type="Decimal" Name="Longitude" Nullable="false" Precision="9" Scale="6" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Keywords" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateRangeStart" Precision="3" />
+    <Property Type="DateTime" Name="DateRangeEnd" Precision="3" />
+    <Property Type="Int32" Name="Distance" />
+    <Property Type="String" Name="DistanceUnit" MaxLength="2" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MealItems_Photos">
+    <Key>
+      <PropertyRef Name="MealItemPhotoID" />
+    </Key>
+    <Property Type="Int32" Name="MealItemPhotoID" Nullable="false" />
+    <Property Type="Int32" Name="MealItemID" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MealItem" Relationship="ThreeSixtyTwoModel.FK_MealItems_Photos_MealItems" FromRole="MealItems_Photos" ToRole="MealItem" />
+    <Property Type="Int32" Name="IsCover" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LKUPAllergenicFood">
+    <Key>
+      <PropertyRef Name="AllergenicFoodID" />
+    </Key>
+    <Property Type="Int32" Name="AllergenicFoodID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="AllergenicFood" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MealItems_AllergenicFoods" Relationship="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_LKUPAllergenicFood" FromRole="LKUPAllergenicFood" ToRole="MealItems_AllergenicFoods" />
+  </EntityType>
+  <EntityType Name="MealItem">
+    <Key>
+      <PropertyRef Name="MealItemId" />
+    </Key>
+    <Property Type="Int32" Name="MealItemId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="MealItemName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Ingredients" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ServingUnit" Nullable="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="Int32" Name="CusineTypeID" Nullable="false" />
+    <Property Type="Int32" Name="MealTypeID" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Int32" Name="DietTypeID" />
+    <NavigationProperty Name="LKUPCuisineType" Relationship="ThreeSixtyTwoModel.FK_MealItems_CuisineTypeLKUP" FromRole="MealItem" ToRole="LKUPCuisineType" />
+    <NavigationProperty Name="LKUPDietType" Relationship="ThreeSixtyTwoModel.FK_MealItems_LKUPDietType" FromRole="MealItem" ToRole="LKUPDietType" />
+    <NavigationProperty Name="LKUPMealType" Relationship="ThreeSixtyTwoModel.FK_MealItems_MealTypeLKUP" FromRole="MealItem" ToRole="LKUPMealType" />
+    <NavigationProperty Name="LKUPServingUnit" Relationship="ThreeSixtyTwoModel.FK_MealItems_LKUPServingUnit" FromRole="MealItem" ToRole="LKUPServingUnit" />
+    <NavigationProperty Name="MealItems_AllergenicFoods" Relationship="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_MealItems" FromRole="MealItem" ToRole="MealItems_AllergenicFoods" />
+    <NavigationProperty Name="MealItems_Photos" Relationship="ThreeSixtyTwoModel.FK_MealItems_Photos_MealItems" FromRole="MealItem" ToRole="MealItems_Photos" />
+    <NavigationProperty Name="MealAds" Relationship="ThreeSixtyTwoModel.FK_MealAds_MealItems" FromRole="MealItem" ToRole="MealAd" />
+    <NavigationProperty Name="MealAds1" Relationship="ThreeSixtyTwoModel.FK_MealAds_MealItems1" FromRole="MealItem" ToRole="MealAd" />
+  </EntityType>
+  <EntityType Name="MealItems_AllergenicFoods">
+    <Key>
+      <PropertyRef Name="MealItem_AllergenID" />
+    </Key>
+    <Property Type="Int32" Name="AllergenicFoodID" Nullable="false" />
+    <Property Type="Int32" Name="MealItemID" Nullable="false" />
+    <Property Type="Int32" Name="MealItem_AllergenID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="LKUPAllergenicFood" Relationship="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_LKUPAllergenicFood" FromRole="MealItems_AllergenicFoods" ToRole="LKUPAllergenicFood" />
+    <NavigationProperty Name="MealItem" Relationship="ThreeSixtyTwoModel.FK_MealItems_AllergenicFoods_MealItems" FromRole="MealItems_AllergenicFoods" ToRole="MealItem" />
+  </EntityType>
+  <Association Name="FK_MealItems_AllergenicFoods_LKUPAllergenicFood">
+    <End Type="ThreeSixtyTwoModel.LKUPAllergenicFood" Role="LKUPAllergenicFood" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealItems_AllergenicFoods" Role="MealItems_AllergenicFoods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPAllergenicFood">
+        <PropertyRef Name="AllergenicFoodID" />
+      </Principal>
+      <Dependent Role="MealItems_AllergenicFoods">
+        <PropertyRef Name="AllergenicFoodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealItems_CuisineTypeLKUP">
+    <End Type="ThreeSixtyTwoModel.LKUPCuisineType" Role="LKUPCuisineType" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPCuisineType">
+        <PropertyRef Name="CuisineTypeID" />
+      </Principal>
+      <Dependent Role="MealItem">
+        <PropertyRef Name="CusineTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealItems_LKUPDietType">
+    <End Type="ThreeSixtyTwoModel.LKUPDietType" Role="LKUPDietType" Multiplicity="0..1" />
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPDietType">
+        <PropertyRef Name="DietTypeID" />
+      </Principal>
+      <Dependent Role="MealItem">
+        <PropertyRef Name="DietTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealItems_MealTypeLKUP">
+    <End Type="ThreeSixtyTwoModel.LKUPMealType" Role="LKUPMealType" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPMealType">
+        <PropertyRef Name="MealTypeID" />
+      </Principal>
+      <Dependent Role="MealItem">
+        <PropertyRef Name="MealTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealItems_LKUPServingUnit">
+    <End Type="ThreeSixtyTwoModel.LKUPServingUnit" Role="LKUPServingUnit" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPServingUnit">
+        <PropertyRef Name="ServingUnitID" />
+      </Principal>
+      <Dependent Role="MealItem">
+        <PropertyRef Name="ServingUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealItems_AllergenicFoods_MealItems">
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealItems_AllergenicFoods" Role="MealItems_AllergenicFoods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealItem">
+        <PropertyRef Name="MealItemId" />
+      </Principal>
+      <Dependent Role="MealItems_AllergenicFoods">
+        <PropertyRef Name="MealItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealItems_Photos_MealItems">
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealItems_Photos" Role="MealItems_Photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealItem">
+        <PropertyRef Name="MealItemId" />
+      </Principal>
+      <Dependent Role="MealItems_Photos">
+        <PropertyRef Name="MealItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Precision="3" />
+    <Property Type="String" Name="ConfirmationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsConfirmed" />
+    <Property Type="DateTime" Name="LastPasswordFailureDate" Precision="3" />
+    <Property Type="Int32" Name="PasswordFailuresSinceLastSuccess" Nullable="false" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="PasswordChangedDate" Precision="3" />
+    <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PasswordVerificationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="PasswordVerificationTokenExpirationDate" Precision="3" />
+  </EntityType>
+  <EntityType Name="TempOrderList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="userid" Nullable="false" />
+    <Property Type="String" Name="sessionId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MealItemId" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="itemName" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="lineitemcost" Nullable="false" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="qty" Nullable="false" />
+    <Property Type="Decimal" Name="TotalCost" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="TempUserOrder">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Type="Int32" Name="userid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="sessionId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MealItemId" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="itemName" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="lineitemcost" Nullable="false" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="qty" Nullable="false" />
+    <Property Type="Decimal" Name="TotalCost" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="FunOrderDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" Scale="4" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="FeedbackOnQuality" />
+    <Property Type="Int32" Name="FeedbackOnPrice" />
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <NavigationProperty Name="FunOrder" Relationship="ThreeSixtyTwoModel.FK_FunOrderDetails_FunOrders" FromRole="FunOrderDetail" ToRole="FunOrder" />
+  </EntityType>
+  <EntityType Name="FunOrder">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="EstimatedPickupTime" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="ActualPickUpTime" Precision="3" />
+    <Property Type="Int32" Name="FeedbackOnTime" />
+    <Property Type="String" Name="GeneralFeedback" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="Int32" Name="OrderID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="PaymentOptionID" Nullable="false" />
+    <Property Type="Int32" Name="DeliveryMethodID" Nullable="false" />
+    <NavigationProperty Name="FunOrderDetails" Relationship="ThreeSixtyTwoModel.FK_FunOrderDetails_FunOrders" FromRole="FunOrder" ToRole="FunOrderDetail" />
+  </EntityType>
+  <Association Name="FK_FunOrderDetails_FunOrders">
+    <End Type="ThreeSixtyTwoModel.FunOrder" Role="FunOrder" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.FunOrderDetail" Role="FunOrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FunOrder">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="FunOrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SendEmail">
+    <Key>
+      <PropertyRef Name="SendEmailID" />
+      <PropertyRef Name="SenderEmailAddress" />
+      <PropertyRef Name="RecipientEmailAddress" />
+      <PropertyRef Name="Subject" />
+      <PropertyRef Name="Body" />
+      <PropertyRef Name="DeliveryTime" />
+      <PropertyRef Name="DeliveryMethod" />
+      <PropertyRef Name="SendDate" />
+    </Key>
+    <Property Type="Int32" Name="SendEmailID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="SenderEmailAddress" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="RecipientEmailAddress" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Body" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DeliveryTime" Nullable="false" Precision="3" />
+    <Property Type="String" Name="DeliveryMethod" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="SendDate" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="ActiveMealAd">
+    <Key>
+      <PropertyRef Name="MealAdID" />
+    </Key>
+    <Property Type="Int32" Name="MealAdID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="MealItemName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="PickUpTime" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="MaxOrders" Nullable="false" />
+    <Property Type="Int32" Name="PlacedOrder" Nullable="false" />
+    <Property Type="DateTime" Name="LastOrderTime" Nullable="false" Precision="3" />
+    <Property Type="String" Name="CuisineType" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MealType" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Ingredients" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Photo" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Quantity" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="String" Name="Currency" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address1" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Address2" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Province" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Zip" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Country" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Telephone" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FoodAllergy" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FoodType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="Latitude" Nullable="false" Precision="9" Scale="6" />
+    <Property Type="Decimal" Name="Longitude" Nullable="false" Precision="9" Scale="6" />
+    <Property Type="String" Name="latlng" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PriceRange" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AllInfo" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProviderType" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ProviderName" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="FullAddress" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="LKUPKitchenType">
+    <Key>
+      <PropertyRef Name="KitchenTypeID" />
+    </Key>
+    <Property Type="Int32" Name="KitchenTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="CreatedById" />
+    <Property Type="Int32" Name="UpdatedById" />
+    <NavigationProperty Name="UserDetails" Relationship="ThreeSixtyTwoModel.FK_UserDetails_KitchenType" FromRole="LKUPKitchenType" ToRole="UserDetail" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="DateUpdated" Precision="3" />
+    <Property Type="Int32" Name="UserStatus" Nullable="false" />
+    <Property Type="String" Name="Notes" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Photo" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="Int32" Name="UpdatedBy" />
+    <Property Type="String" Name="AllInfo" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="AddressID" Nullable="false" />
+    <Property Type="Int32" Name="GoogleCheckoutID" />
+    <Property Type="Int32" Name="PayPalID" />
+    <Property Type="Int32" Name="AmazonPayID" />
+    <Property Type="String" Name="SkypeID" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Mobile" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="IdentificationNumber" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PassportNumber" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CountryOfIssuance" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="IsSeller" />
+    <Property Type="String" Name="KitchenName" MaxLength="56" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="KitchenTypeID" />
+    <NavigationProperty Name="AddressList" Relationship="ThreeSixtyTwoModel.FK_UserDetails_AddressList" FromRole="UserDetail" ToRole="AddressList" />
+    <NavigationProperty Name="AddressList1" Relationship="ThreeSixtyTwoModel.FK_UserDetails_AddressList1" FromRole="UserDetail" ToRole="AddressList" />
+    <NavigationProperty Name="LKUPKitchenType" Relationship="ThreeSixtyTwoModel.FK_UserDetails_KitchenType" FromRole="UserDetail" ToRole="LKUPKitchenType" />
+    <Property Type="Int32" Name="SellersTermsAndConditionAccepted" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_UserDetails_AddressList">
+    <End Type="ThreeSixtyTwoModel.AddressList" Role="AddressList" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddressList">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_AddressList1">
+    <End Type="ThreeSixtyTwoModel.AddressList" Role="AddressList" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddressList">
+        <PropertyRef Name="AddressID" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="AddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_KitchenType">
+    <End Type="ThreeSixtyTwoModel.LKUPKitchenType" Role="LKUPKitchenType" Multiplicity="0..1" />
+    <End Type="ThreeSixtyTwoModel.UserDetail" Role="UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPKitchenType">
+        <PropertyRef Name="KitchenTypeID" />
+      </Principal>
+      <Dependent Role="UserDetail">
+        <PropertyRef Name="KitchenTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SellerDefaultSetting">
+    <Key>
+      <PropertyRef Name="SellerSettingID" />
+    </Key>
+    <Property Type="Int32" Name="SellerSettingID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="userid" Nullable="false" />
+    <Property Type="Int32" Name="OrderFulfillmentTime" />
+    <Property Type="Int32" Name="UnitOfTime" />
+    <Property Type="Int32" Name="Delivery" />
+    <Property Type="Int32" Name="Shipping" />
+    <Property Type="Int32" Name="PickUp" />
+    <Property Type="Int32" Name="AcceptCard" />
+    <Property Type="Int32" Name="AcceptCashOnDelivery" />
+    <Property Type="Int32" Name="HasPermit" />
+    <Property Type="Int32" Name="Permit" />
+    <Property Type="String" Name="PermitImage" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserAgreement">
+    <Key>
+      <PropertyRef Name="AgreementID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="AgreementDetails" />
+      <PropertyRef Name="DateOfAgreement" />
+    </Key>
+    <Property Type="Int32" Name="AgreementID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AgreementDetails" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DateOfAgreement" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserAgreementsAcceptanceDetail">
+    <Key>
+      <PropertyRef Name="UserAgreementID" />
+    </Key>
+    <Property Type="Int32" Name="UserAgreementID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="AgreementID" Nullable="false" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="DateTime" Name="AgreementAccepetedOn" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="AvailabilityType">
+    <Key>
+      <PropertyRef Name="AvaiilabilityTypeID" />
+    </Key>
+    <Property Type="Int32" Name="AvaiilabilityTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="AvailabilityType1" Nullable="false" MaxLength="56" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Descriptions" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MealAds" Relationship="ThreeSixtyTwoModel.FK_MealAds_AvailabilityTypes" FromRole="AvailabilityType" ToRole="MealAd" />
+  </EntityType>
+  <EntityType Name="MealAds_PaymentOptions">
+    <Key>
+      <PropertyRef Name="MealAdPaymentOptionID" />
+    </Key>
+    <Property Type="Int32" Name="PaymentOptionID" Nullable="false" />
+    <Property Type="Int32" Name="MealAdID" Nullable="false" />
+    <Property Type="Int32" Name="MealAdPaymentOptionID" Nullable="false" />
+    <NavigationProperty Name="PaymentOption" Relationship="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_PaymentOptions" FromRole="MealAds_PaymentOptions" ToRole="PaymentOption" />
+    <NavigationProperty Name="MealAd" Relationship="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_MealAds" FromRole="MealAds_PaymentOptions" ToRole="MealAd" />
+  </EntityType>
+  <EntityType Name="PaymentOption">
+    <Key>
+      <PropertyRef Name="PaymentOptionID" />
+    </Key>
+    <Property Type="Int32" Name="PaymentOptionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="PaymentOption1" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MealAds_PaymentOptions" Relationship="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_PaymentOptions" FromRole="PaymentOption" ToRole="MealAds_PaymentOptions" />
+  </EntityType>
+  <Association Name="FK_MealAds_PaymentOptions_PaymentOptions">
+    <End Type="ThreeSixtyTwoModel.PaymentOption" Role="PaymentOption" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAds_PaymentOptions" Role="MealAds_PaymentOptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentOption">
+        <PropertyRef Name="PaymentOptionID" />
+      </Principal>
+      <Dependent Role="MealAds_PaymentOptions">
+        <PropertyRef Name="PaymentOptionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="LKUPDeliveryMethod">
+    <Key>
+      <PropertyRef Name="DeliveryMethodID" />
+    </Key>
+    <Property Type="Int32" Name="DeliveryMethodID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DeliveryMethod" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MealAds_DeliveryMethods" Relationship="ThreeSixtyTwoModel.FK_MealAds_DeliveryMethods_LKUPDeliveryMethod" FromRole="LKUPDeliveryMethod" ToRole="MealAds_DeliveryMethods" />
+  </EntityType>
+  <EntityType Name="MealAds_DeliveryMethods">
+    <Key>
+      <PropertyRef Name="MealAd_DeliveryMethodID" />
+    </Key>
+    <Property Type="Int32" Name="MealAd_DeliveryMethodID" Nullable="false" />
+    <Property Type="Int32" Name="DeliveryMethodID" Nullable="false" />
+    <Property Type="Int32" Name="MealAdID" Nullable="false" />
+    <NavigationProperty Name="LKUPDeliveryMethod" Relationship="ThreeSixtyTwoModel.FK_MealAds_DeliveryMethods_LKUPDeliveryMethod" FromRole="MealAds_DeliveryMethods" ToRole="LKUPDeliveryMethod" />
+    <NavigationProperty Name="MealAd" Relationship="ThreeSixtyTwoModel.FK_MealAds_DeliveryMethods_MealAds" FromRole="MealAds_DeliveryMethods" ToRole="MealAd" />
+  </EntityType>
+  <Association Name="FK_MealAds_DeliveryMethods_LKUPDeliveryMethod">
+    <End Type="ThreeSixtyTwoModel.LKUPDeliveryMethod" Role="LKUPDeliveryMethod" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAds_DeliveryMethods" Role="MealAds_DeliveryMethods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LKUPDeliveryMethod">
+        <PropertyRef Name="DeliveryMethodID" />
+      </Principal>
+      <Dependent Role="MealAds_DeliveryMethods">
+        <PropertyRef Name="DeliveryMethodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MealAd">
+    <Key>
+      <PropertyRef Name="MealAdID" />
+    </Key>
+    <Property Type="Int32" Name="MealAdID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MealItemID" Nullable="false" />
+    <Property Type="Int32" Name="MaxOrders" Nullable="false" />
+    <Property Type="Int32" Name="PlacedOrder" Nullable="false" />
+    <Property Type="Int32" Name="AvailabilityTypeID" Nullable="false" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <NavigationProperty Name="AvailabilityType" Relationship="ThreeSixtyTwoModel.FK_MealAds_AvailabilityTypes" FromRole="MealAd" ToRole="AvailabilityType" />
+    <NavigationProperty Name="Carts" Relationship="ThreeSixtyTwoModel.FK_Cart_MealAds" FromRole="MealAd" ToRole="Cart" />
+    <NavigationProperty Name="MealAds_DeliveryMethods" Relationship="ThreeSixtyTwoModel.FK_MealAds_DeliveryMethods_MealAds" FromRole="MealAd" ToRole="MealAds_DeliveryMethods" />
+    <NavigationProperty Name="MealItem" Relationship="ThreeSixtyTwoModel.FK_MealAds_MealItems" FromRole="MealAd" ToRole="MealItem" />
+    <NavigationProperty Name="MealItem1" Relationship="ThreeSixtyTwoModel.FK_MealAds_MealItems1" FromRole="MealAd" ToRole="MealItem" />
+    <NavigationProperty Name="MealAds_PaymentOptions" Relationship="ThreeSixtyTwoModel.FK_MealAds_PaymentOptions_MealAds" FromRole="MealAd" ToRole="MealAds_PaymentOptions" />
+    <NavigationProperty Name="OrderDetails" Relationship="ThreeSixtyTwoModel.FK_OrderDetails_MealAds" FromRole="MealAd" ToRole="OrderDetail" />
+    <NavigationProperty Name="MealAd_Schedules" Relationship="ThreeSixtyTwoModel.FK_MealAd_Schedules_MealAds" FromRole="MealAd" ToRole="MealAd_Schedules" />
+  </EntityType>
+  <Association Name="FK_MealAds_AvailabilityTypes">
+    <End Type="ThreeSixtyTwoModel.AvailabilityType" Role="AvailabilityType" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AvailabilityType">
+        <PropertyRef Name="AvaiilabilityTypeID" />
+      </Principal>
+      <Dependent Role="MealAd">
+        <PropertyRef Name="AvailabilityTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cart_MealAds">
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealAd">
+        <PropertyRef Name="MealAdID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="MealAdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealAds_DeliveryMethods_MealAds">
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAds_DeliveryMethods" Role="MealAds_DeliveryMethods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealAd">
+        <PropertyRef Name="MealAdID" />
+      </Principal>
+      <Dependent Role="MealAds_DeliveryMethods">
+        <PropertyRef Name="MealAdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealAds_MealItems">
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealItem">
+        <PropertyRef Name="MealItemId" />
+      </Principal>
+      <Dependent Role="MealAd">
+        <PropertyRef Name="MealItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealAds_MealItems1">
+    <End Type="ThreeSixtyTwoModel.MealItem" Role="MealItem" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealItem">
+        <PropertyRef Name="MealItemId" />
+      </Principal>
+      <Dependent Role="MealAd">
+        <PropertyRef Name="MealItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MealAds_PaymentOptions_MealAds">
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAds_PaymentOptions" Role="MealAds_PaymentOptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealAd">
+        <PropertyRef Name="MealAdID" />
+      </Principal>
+      <Dependent Role="MealAds_PaymentOptions">
+        <PropertyRef Name="MealAdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_MealAds">
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealAd">
+        <PropertyRef Name="MealAdID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="MealAdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MealAd_Schedules">
+    <Key>
+      <PropertyRef Name="MealAdScheduleID" />
+    </Key>
+    <Property Type="Int32" Name="MealAdScheduleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MealAdID" Nullable="false" />
+    <Property Type="DateTime" Name="PickUpStartDateTime" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="PickUpEndDateTime" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="LastOrderDateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="MealAd" Relationship="ThreeSixtyTwoModel.FK_MealAd_Schedules_MealAds" FromRole="MealAd_Schedules" ToRole="MealAd" />
+  </EntityType>
+  <Association Name="FK_MealAd_Schedules_MealAds">
+    <End Type="ThreeSixtyTwoModel.MealAd" Role="MealAd" Multiplicity="1" />
+    <End Type="ThreeSixtyTwoModel.MealAd_Schedules" Role="MealAd_Schedules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MealAd">
+        <PropertyRef Name="MealAdID" />
+      </Principal>
+      <Dependent Role="MealAd_Schedules">
+        <PropertyRef Name="MealAdID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ContactList">
+    <Key>
+      <PropertyRef Name="ContactListID" />
+    </Key>
+    <Property Type="Int32" Name="ContactListID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="SenderEmailAddress" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="RecipientUserID" />
+    <Property Type="String" Name="RecipientEmailAddress" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="RequestAccepted" />
+  </EntityType>
+</Schema>

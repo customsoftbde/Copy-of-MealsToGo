@@ -1,0 +1,102 @@
+﻿@model MealsToGo.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Order</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MealItemId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MealItemId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserDetails.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserDetails.FirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.QuantityOrdered)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QuantityOrdered)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EstimatedPickupTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EstimatedPickupTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ActualPickUpTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActualPickUpTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FeedbackOnQuality)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FeedbackOnQuality)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FeedbackOnTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FeedbackOnTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FeedbackOnPrice)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FeedbackOnPrice)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GeneralFeedback)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GeneralFeedback)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateUpdated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index",null, new { @class = "menu-14u" })
+    </p>
+}

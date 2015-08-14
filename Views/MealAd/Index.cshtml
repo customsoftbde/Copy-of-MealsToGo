@@ -1,0 +1,158 @@
+﻿@model IEnumerable<MealsToGo.ViewModels.MealAdViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    int mealadCount = Model.Count();
+    int userid = WebSecurity.CurrentUserId;
+}
+
+
+<div class="cont-main">
+    <h1>Your Existing Food Advertisements</h1>
+
+
+
+
+
+    @if (mealadCount == 0)
+    {  
+        <div class="cont">
+            <div class="cont-rit">
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="normal-14">You have not advertised with us yet.</td>
+                    </tr>
+                    @if (Session["ReadyToAdvertise"] == "0")
+                    {
+                        <tr>
+                            <td class="normal-14">To advertise your food or food service, please complete the following steps:</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="47%" class="normal-14"><strong>@Html.ActionLink("Add a Food", "Create", "MealItem", routeValues: new { userid = userid }, htmlAttributes: null)</strong></td>
+                                        <td width="53%">
+                                            <label>
+                                                @if (ViewBag.MealItemCount == 0)
+                                                {<span class="submit5">Incomplete</span>}
+                                                else
+                                                {<span class="submit5">Complete</span>}
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="normal-14"><strong>@Html.ActionLink("Add/Verify Address", "Edit", "User", routeValues: new { userid = userid }, htmlAttributes: null)</strong></td>
+                                        <td>
+                                            <label>
+                                                @if (ViewBag.AddressPresent)
+                                                {<span class="submit5">Complete</span>}
+                                                else
+                                                {<span class="submit5">Incomplete</span>}
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="normal-14"><strong>@Html.ActionLink("Change/Verify Privacy Settings", "Index", "Settings", routeValues: new { userid = userid }, htmlAttributes: null)</strong></td>
+                                        <td>
+                                            <label>
+                                                @if (ViewBag.PrivacySettingConfirmed)
+                                                {<span class="submit5">Complete</span>}
+                                                else
+                                                {<span class="submit5">Incomplete</span>}
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="normal-14"><strong>@Html.ActionLink("Accept Seller Agreement", "AcceptAgreement", "User", routeValues: new { userid = userid }, htmlAttributes: null)</strong></td>
+                                        <td>
+                                            <label>
+                                                @if (ViewBag.SellerTermsandSettingAccepted)
+                                                {<span class="submit5">Complete</span>}
+                                                else
+                                                {<span class="submit5">Incomplete</span>}
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <p>
+                            @Html.ActionLink("Advertise", "Create", "MealAd", routeValues: new { userid = userid }, htmlAttributes: new { @class = "menu-14u" })
+                            @Html.ActionLink("Add a Food", "Create", "MealItem", routeValues: new { userid = userid }, htmlAttributes: new { @class = "menu-14u" })
+                        </p>
+                    }
+                </table>
+
+            </div>
+            <div class="clr"></div>
+
+        </div>
+       
+    }
+    else
+    {
+         <p>
+                            @Html.ActionLink("Advertise", "Create", "MealAd", routeValues: new { userid = userid }, htmlAttributes: new { @class = "menu-14u" })
+                            @Html.ActionLink("Add a Food", "Create", "MealItem", routeValues: new { userid = userid }, htmlAttributes: new { @class = "menu-14u" })
+                        </p>
+        <div class="cont">
+
+            <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#c6c3c3" style="border-collapse: collapse;">
+                <tr>
+                    <td width="25%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Meal Item Name</strong></td>
+                   
+                    <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Max Orders</strong></td>
+                  
+                    @*<td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Last Time Order</strong></td>*@
+                    <td width="25%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Action </strong></td>
+                </tr>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="normal-14">
+                            @Html.DisplayFor(modelItem => item.MealItemName)
+                        </td>
+                      
+                        <td class="normal-14">
+                            @Html.DisplayFor(modelItem => item.MaxOrders)
+                        </td>
+                        @*<td>
+
+                         <p>Schedule</p>
+                     
+                         @Html.EditorFor(modelItem => item.MealAdSchedules)
+                     
+                       
+
+                  
+                        </td>*@
+                        @*<td class="normal-14">
+                            
+                        </td>*@
+                        <td>
+
+                            @Html.ActionLink("Meals Ordered", "Index", "Order", routeValues:new { MealAdid = item.MealAdID }, htmlAttributes: new { @class = "menu-14u" }) |
+                            @Html.ActionLink("Edit", "Edit", new { id = item.MealAdID }, htmlAttributes: new { @class = "menu-14u" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.MealAdID }, htmlAttributes: new { @class = "menu-14u" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.MealAdID }, htmlAttributes: new { @class = "menu-14u" })|
+                            @Html.ActionLink("Order Dish", "Create", "Order", routeValues: new { MealAdid = item.MealAdID },  htmlAttributes: new { @class = "menu-14u" })
+
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+    }
+</div>

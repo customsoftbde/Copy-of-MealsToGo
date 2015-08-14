@@ -1,0 +1,216 @@
+﻿@model IEnumerable<MealsToGo.Models.TempOrderList>
+
+@using MealsToGo.Helpers
+@using MealsToGo.Models
+@using Trirand.Web.Mvc
+@using JQGridMVCExamples.Models;
+
+
+@{
+    ViewBag.Title = "Search" + @Url.Action("Index");
+}
+
+<link href="~/Content/themes/smoothness/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+
+<link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/Scripts/grid.locale-en.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.jqGrid.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="~/Content/lightbox.css" media="screen,projection" type="text/css" />
+
+<!-- JavaScript -->
+@*<script type="text/javascript" src="~/Scripts/prototype.js"></script>*@
+<script type="text/javascript" src="~/Scripts/lightbox.js"></script>
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+        function funUpdatetoCart(mealItemId) {
+            var quantity = jQuery("#txtQty" + mealItemId).val();
+            jQuery.ajax("UpdatetoCart",
+             {
+                 data: { id: mealItemId, qty: quantity },
+                 type: "GET",
+                 contentType: "application/json",
+                 dataType: "json",
+                 success: function (data) {
+                     // alert(data);
+                     window.location.href = "cart?id=" + mealItemId;
+                 },
+                 error: function (e, s, t) {
+                     //alert(e.respon);
+                     window.location.href = "cart?id=" + mealItemId;
+                 }
+             });
+        }
+        var myData = $grid = jQuery("#list");
+        //formatter:'currency',
+        //formatoptions: {prefix:'($', suffix:')', thousandsSeparator:','}
+        $grid.jqGrid({
+            url: 'CartJsonData',
+            datatype: "json",
+            width: "100%",
+            colNames: ["Id", "Product Name", "Price", "Qty.", "TotalCost"],
+            colModel: [
+
+                {
+                    name: "id", sorttype: "int", resizable: false, key: true
+                },
+                {
+                    name: "itemName", sorttype: "string", resizable: false, editable: false
+                },
+                {
+                    name: "lineitemcost", align: 'right', resizable: false, editable: false, formatter: 'currency', formatoptions: { prefix: '$', suffix: '', thousandsSeparator: ',' }
+                },
+                {
+                    name: "qty", sorttype: "int", resizable: false, editable: true, editrules: { number: true }
+                },
+                {
+                    name: "TotalCost", align: 'right', resizable: false, editable: false, formatter: 'currency', formatoptions: { prefix: '$', suffix: '', thousandsSeparator: ',' }
+                },
+            ],
+            rowNum: 10,
+            rowList: [5, 10, 20],
+            pager: "#pager",
+            gridview: true,
+            ignoreCase: true,
+            rownumbers: true,
+            hidegrid: false,
+            viewrecords: true,
+            fixed: false,
+            height: "100%",
+            caption: "Product List",
+            loadComplete: function () {
+                var total = $grid.jqGrid('getCol', 'TotalCost', false, 'sum');
+                $grid.jqGrid('footerData', 'set', { qty: 'Total', TotalCost: total });
+            },
+            forceFit: true,
+            cellEdit: true,
+            cellsubmit: 'remote',
+            cellurl: 'UpdatetoCart',
+            footerrow: true,
+            userDataOnFooter: true,
+            afterEditCell: function (id, name, val, iRow, iCol) {
+                if (name == "qty") {
+                    //$grid.trigger("reloadGrid");
+                }
+            },
+            afterSaveCell: function () {
+                jQuery(this).trigger('reloadGrid');
+            }
+        });
+        $grid.hideCol("id");
+        $grid.jqGrid("navGrid", "#pager", { add: false, edit: false, del: false, search: true, nav: false }
+            , {
+                closeOnEscape: true, reloadAfterSubmit: true,
+                afterSubmit: function (response, postdata) {
+                    $grid.trigger("reloadGrid");
+                    return [true, '']
+                }
+            }, { width: 300 });
+
+        jQuery("#dedata").click(function () {
+            var gr = $grid.jqGrid('getGridParam', 'selrow');
+            if (gr != null) {
+                // $grid.jqGrid('delGridRow', gr, { reloadAfterSubmit: true });
+                jQuery.ajax("RemoveAllFromCart",
+          {
+              data: { id: gr },
+              type: "GET",
+              contentType: "application/json",
+              dataType: "json",
+              success: function (data) {
+                  $grid.trigger("reloadGrid");
+              },
+              error: function (e, s, t) {
+                  $grid.trigger("reloadGrid");
+              }
+          });
+
+            }
+            else alert("Please Select Row to delete!");
+        });
+    });
+</script>
+<div class="cont-main">
+    <div class="cont-rit">
+
+        <div class="gride" width="100%">
+            <table id="list">
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div id="pager"></div>
+        <input type="button" id="dedata" class="submit" value="Delete Selected" style="margin-left:0px;" />
+        <input type="button"  onclick="window.location.href = '/'" name="button21" id="button21" value="Continue shopping" class="submit" style="margin-left:24px;" />
+        <input type="button" onclick="window.location.href = 'FinalOrder'" name="button2" id="button2" value="Proceed to Checkout" class="submit" style="margin-left:24px;" />
+        @*<table width="96%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td  align="left">
+                    <label>
+                         <input type="button"  onclick="window.location.href = '/'" name="button21" id="button21" value="Continue shopping" class="submit" />
+
+                    </label>
+
+                </td>
+                <td align="right">
+                    <input type="button"  onclick="window.location.href ='FinalOrder'" name="button2" id="button2" value="Proceed to Checkout" class="submit" />
+                </td>
+            </tr>
+        </table>*@
+        @*<table width="100%" border="1" cellpadding="5" cellspacing="0" bordercolor="#E8E8E8" style="border-collapse: collapse;">
+            <tbody>
+                <tr>
+
+                    <td width="67%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Product(s)</strong></td>
+                    <td width="7%" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Price</strong></td>
+                    <td width="7%" height="30" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Qty.</strong></td>
+                    <td width="15%" height="30" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Total</strong></td>
+                    <td width="11%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Update</strong></td>
+                    <td width="11%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Remove</strong></td>
+                </tr>
+                @foreach (TempOrderList temp in Model)
+                {
+                    <tr>
+
+                        <td align="left" valign="top">@temp.itemName</td>
+                        <td align="center" valign="middle">@string.Format("{0:C}", @temp.lineitemcost) </td>
+                        <td align="center" valign="middle">
+                            @Html.TextBox("txtQty" + @temp.id.ToString(), @temp.qty)
+                        </td>
+                        <td align="center" valign="middle" class="normal14"><strong>@string.Format("{0:C}", @temp.TotalCost) </strong></td>
+                        <td align="center" valign="middle">
+                            <a href="#" onclick="funUpdatetoCart(@temp.id);">Update</a>
+                        </td>
+                        <td align="center" valign="middle">
+
+                            @Html.ActionLink("Remove", "RemoveAllFromCart", new { temp.id })</td>
+                    </tr>
+                }
+                <tr>
+                    <td align="left" valign="top" class="normal-14" colspan="3" style="text-align: right;">Total</td>
+                    <td align="center" valign="middle" class="red-18" colspan="1" style="text-align: center;"><strong>@string.Format("{0:C}", @Model.Sum(x => x.TotalCost))</strong></td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="6" align="center" valign="middle">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="6" align="center" valign="middle">
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>*@
+    </div>
+
+    <div class="clr"></div>
+
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/Funfooding_Order.js"></script>
+
+
+

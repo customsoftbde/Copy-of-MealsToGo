@@ -1,0 +1,59 @@
+﻿@model MealsToGo.Models.EmailInvitation
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+
+    <fieldset>
+        <legend>EmailInvitation</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SenderID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SenderID)
+            @Html.ValidationMessageFor(model => model.SenderID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SenderEmailAddress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SenderEmailAddress)
+            @Html.ValidationMessageFor(model => model.SenderEmailAddress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecipientEmailAddress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecipientEmailAddress)
+            @Html.ValidationMessageFor(model => model.RecipientEmailAddress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecipientID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecipientID)
+            @Html.ValidationMessageFor(model => model.RecipientID)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

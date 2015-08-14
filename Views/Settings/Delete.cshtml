@@ -1,0 +1,67 @@
+﻿@model MealsToGo.Models.UserSetting
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>UserSetting</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserSettingsID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserSettingsID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ActivityTypeID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActivityTypeID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PrivacySettingsID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PrivacySettingsID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReceiveEmailNotification)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReceiveEmailNotification)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReceiveMobileTextNotification)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReceiveMobileTextNotification)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NotificationFrequency)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NotificationFrequency)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index",null, new { @class = "menu-14u" })
+    </p>
+}

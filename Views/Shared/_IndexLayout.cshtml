@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+@model MealsToGo.ViewModels.LoginRegisterViewModel
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Funfooding! - @*@ViewBag.Title*@ (desktop)</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <link href="~/Content/Style/fun-fooding.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Style/media-queries.css" rel="stylesheet" type="text/css">
+    <style>
+        .error{
+    color:red !important;
+}
+.error ul{
+    color:red !important;
+}
+.error ul li{
+    color: red !important;
+    font-style: italic !important;
+}
+        .field-validation-error {
+             color: red !important;
+    font-style: italic !important;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm(new { ReturnUrl = Request.QueryString["ReturnUrl"] }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="header">
+            <div class="header-bl">
+                <img src="~/Content/images/funfooding.jpg" alt="Funfooding" class="logo" />
+                <a href="/Home/index">HI</a>
+                <div class="login">
+                    <label>
+                        
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "login-tb", placeholder = "Your Email" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </label>
+                    <label>
+                        
+                        @Html.PasswordFor(m => m.Password, new { @class = "login-tb", placeholder = "Your Password" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </label>
+                    <label>
+                        <input name="button" type="submit" class="login-sbt" id="button" value="Log In"/>
+                    </label>
+
+                    <label>
+                        <p class="rmbr">
+                            @Html.CheckBoxFor(m => m.RememberMe)&nbsp;Remember me
+                            |  <a href="ResetPassword">Reset password</a>
+                        </p>
+                    </label>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="redborder"></div>
+    @RenderBody()
+
+    <div id="footer">
+        <div class="footer-bl">
+            <ul class="foot">
+                <li><a href="#use">@Html.ActionLink("About", "About", "Company")</li>
+                <li><a href="#use">@Html.ActionLink("Press", "Press", "Company")</li>
+            </ul>
+            <ul class="foot">
+                <li><a href="#use">@Html.ActionLink("Help", "Help", "Company")</li>
+                <li><a href="#use">@Html.ActionLink("Contact", "Contact", "Company")</li>
+            </ul>
+            <ul class="foot">
+                <li><a href="#use">@Html.ActionLink("Terms", "Terms", "Company")</li>
+                <li><a href="#use">@Html.ActionLink("Privacy", "Privacy", "Company")</li>
+            </ul>
+            <ul class="foot2">
+                <li><a href="#use">@Html.ActionLink("News", "News", "Company")</li>
+                <li><a href="#use">@Html.ActionLink("Reviews", "Reviews", "Company")</li>
+            </ul>
+            <div class="clr"></div>
+        </div>
+    </div>
+    <div id="footer2">
+        Copyright © 2014 Funfooding, All Rights Reserved.
+    </div>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.account').on('click', function () {
+            $('.dropdown .submenu').show();
+        });
+        $('#RememberMe').width(10);
+    });
+
+</script>

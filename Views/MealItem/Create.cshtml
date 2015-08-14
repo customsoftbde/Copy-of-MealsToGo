@@ -1,0 +1,230 @@
+﻿@model MealsToGo.ViewModels.MealItemViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Model.DateUpdated = DateTime.Now;
+}
+
+
+
+@using (Html.BeginForm("Create", "MealItem", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(false, "", new { @class = "error" })
+    @Html.HiddenFor(model => model.DateUpdated)
+    @Html.HiddenFor(model => model.UserId)
+   
+    <div class="cont-main">
+        <h1>Add Food</h1>
+
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>Name of Food</p>
+
+                        @Html.TextBoxFor(model => model.MealItemName, new { placeholder = "Pizza,sandwich,kebab...", @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.MealItemName)
+                    </li>
+                    <li>
+                        <p>Ingredients</p>
+                        @Html.TextAreaFor(model => model.Ingredients, new { placeholder = "tomato,cheese,basil...", @class = "gen-ftb", rows = 10, columns = 40 })
+                        @Html.ValidationMessageFor(model => model.Ingredients)
+
+                    </li>
+                    <li>
+                        <p>Diet Type</p>
+                        @Html.DropDownListFor(x => x.DietTypeDD.SelectedDietType, Model.DietTypeDD.DietTypeDDList, "Diet Type", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.DietTypeDD.SelectedDietType)
+                    </li>
+                    <li>
+                        <p>Meal Type</p>
+                        @Html.DropDownListFor(x => x.MealTypeDD.SelectedMealType, Model.MealTypeDD.MealTypeDDList, "Meal Type", new { @class = "gen-ftb" })
+
+                        @Html.ValidationMessageFor(model => model.MealTypeDD.SelectedMealType)
+
+                    </li>
+                    <li>
+                        <p>Cuisine Type</p>
+                        @Html.DropDownListFor(x => x.CusineTypeDD.SelectedCuisine, Model.CusineTypeDD.CuisineDDList, "Cuisine Type", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.CusineTypeDD.SelectedCuisine)
+                    </li>
+                    <li>
+                        <p>Serving Unit</p>
+                        @Html.DropDownListFor(x => x.ServingUnit, Model.ServingUnitDDList, "Serving Unit", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.ServingUnit)
+
+                    </li>
+                    <li>
+                        <p>Quantity</p>
+                        <input id="Quantity" name="Quantity" type="number" value="1" min="1" class="gen-ftb" placeholder="Quantity" />
+                        @*@Html.EditorFor(model => model.Quantity, new { placeholder = "Quantity", @class = "gen-ftb", min = "0" })
+                        @Html.ValidationMessageFor(model => model.Quantity)*@
+
+                    </li>
+
+                    <li>
+                        <p>Allergens(If Any)</p>
+                        @Html.EditorFor(model => model.AllergenDD)
+
+                    <li>
+                        <p>Photo Upload :</p>
+
+
+                        <label>
+                            @Html.TextBoxFor(model => model.Photos, new { type = "file", multiple = "multiple" })
+                            @Html.ValidationMessageFor(model => model.Photos)
+                        </label>
+                        <label class="agree"></label>
+                    </li>
+                    <li>
+                        <p>Price</p>
+                        @Html.TextAreaFor(model => model.Price, new { placeholder = "Price", @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.Price)
+
+                    </li>
+                    <li>
+                        <p>Status</p>
+                        @*@Html.CheckBoxFor(model=>model.Status)*@
+                        @*@Html.EditorFor(model => model.Status)*@
+                        @{
+    SelectListItem[] list = {
+                                            new SelectListItem{Value="1",Text="Active"},
+                                            new SelectListItem{Value="2",Text="Inactive"}};
+                            @Html.DropDownListFor(x => x.Status, list, new { @class = "gen-ftb" })
+                        }
+                    </li>
+                    <li>
+                        <label>
+                            <input type="submit" name="button2" id="button2" value="Create" class="submit" />
+                        </label>
+
+                        @*@Html.ActionLink("Back to List", "Index", new { @class = "menu-14u" })*@
+                        @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                    </li>
+                    <div class="clr"></div>
+                </ul>
+
+
+            </div>
+            <div class="clr"></div>
+
+        </div>
+
+    </div>
+
+@*<fieldset>
+        <legend>MealItem</legend>
+
+
+        @Html.HiddenFor(model => model.DateUpdated)
+        @Html.HiddenFor(model => model.UserId)
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MealItemName, "Name of Food")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.MealItemName, new { placeholder = "Pizza,sandwich,kebab..." })
+            @Html.ValidationMessageFor(model => model.MealItemName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ingredients)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Ingredients, new { placeholder = "tomato,cheese,basil..." })
+            @Html.ValidationMessageFor(model => model.Ingredients)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DietTypeDD, "Diet Type")
+        </div>
+        <div class="editor-field drop-menu">
+            @Html.DropDownListFor(x => x.DietTypeDD.SelectedDietType, Model.DietTypeDD.DietTypeDDList, "Diet Type")
+
+            @Html.ValidationMessageFor(model => model.DietTypeDD.SelectedDietType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MealTypeDD, "Meal Type")
+        </div>
+        <div class="editor-field drop-menu">
+            @Html.DropDownListFor(x => x.MealTypeDD.SelectedMealType, Model.MealTypeDD.MealTypeDDList, "Meal Type")
+
+            @Html.ValidationMessageFor(model => model.MealTypeDD.SelectedMealType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CusineTypeDD, "Cuisine Type")
+        </div>
+
+        <div class="editor-field drop-menu">
+
+            @Html.DropDownListFor(x => x.CusineTypeDD.SelectedCuisine, Model.CusineTypeDD.CuisineDDList, "Cuisine Type")
+            @Html.ValidationMessageFor(model => model.CusineTypeDD.SelectedCuisine)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ServingUnit, "Serving Unit")
+        </div>
+
+        <div class="editor-field">
+
+            @Html.DropDownListFor(x => x.ServingUnit, Model.ServingUnitDDList, "Serving Unit")
+            @Html.ValidationMessageFor(model => model.ServingUnit)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Quantity)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Quantity, new { placeholder = "Quantity" })
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AllergenDD, "Allergens(If Any)")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AllergenDD)
+
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Photos, "Photo Upload(If Any)")
+        </div>
+        <div class="editor-field">
+
+            @Html.TextBoxFor(model => model.Photos, new { type = "file", multiple = "multiple" })
+            @Html.ValidationMessageFor(model => model.Photos)
+
+        </div>
+
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>*@
+}
+
+<div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+@*//Implement Hierarchical JQGrid to display list of restaurants and their advertised dishes. The parent row has 3 columns, restaurant name,address,phone number.
+
+//Each Childrow has 5 colukmns: DishName, Price, Availability Date/Hours, Cuisine Type,Allergens
+
+//Create/View/Delete/List/Update a Menu Item. Complete the unfinish work of an existing page. Requirement is in the Create.aspx page itself
+
+//Create/View/Delete/List/Update a Food-Ad Post. Complete the unfinish work of an existing page. Requirement is in the Create.aspx page itself
+ 
+//Create/View/Delete/List/Update a User Settings:
+
+//Subscriber Settings: 1) Food-Ad Visibility 2) Payment Method 3) Notification Settings: a) Daily/Weekly b) All / Contacts / Connections / Selected List
+
+//Provider Settings: 1) Post Visibility 2) Delivery Methods 3) Payment Method*@

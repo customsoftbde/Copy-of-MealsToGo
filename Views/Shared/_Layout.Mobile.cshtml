@@ -1,0 +1,61 @@
+﻿@{
+    int UserID = 0;
+    if (Request.IsAuthenticated) {
+        UserID = WebSecurity.CurrentUserId;
+    }
+    
+   
+        ViewBag.UserAddress = "1774 Casey Court Mohegan Lake NY 10547";
+        ViewBag.ChefAddress = "112 w 34th street suite 1900 new york, new york 10120";
+    
+       
+}
+
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title (Mobile)</title> 
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/Mobile/css", "~/Content/jquerymobile/css")
+        @Scripts.Render("~/bundles/jquery", "~/bundles/jquerymobile")
+        <script>
+            jQuery(document).ready(function () {
+                jQuery.mobile.ajaxEnabled = false; 
+            });
+        </script>
+    </head> 
+       @RenderSection("Scripts", required: false)
+<body> 
+
+    <div data-role="page" data-theme="a">
+        @Html.Partial("_ViewSwitcher")
+        
+                        <nav>
+	<ul>
+		<li><a href=#use>@Html.ActionLink("My Profile", "Details", "User", routeValues: new { userID = UserID }, htmlAttributes: null)
+            <ul>
+				<li><a href=#use>@Html.ActionLink("My UserInformation", "Index", "User", routeValues: new { userID = UserID }, htmlAttributes: null)</li>
+				<li><a href=#use>@Html.ActionLink("Change Password", "Manage", "Account", routeValues: new { userID = UserID }, htmlAttributes: null)</li>
+			</ul>
+		</li>
+		<li><a href=#use>@Html.ActionLink("Meals", "Index", "MealItem", routeValues: new { userID = UserID }, htmlAttributes: null)
+			
+		</li>
+		
+	</ul>
+</nav>
+
+        <div data-role="header">
+            <h1>@ViewBag.Title</h1>
+        </div>
+
+        <div data-role="content">
+            @RenderSection("featured", false)
+            @RenderBody()		
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+﻿el PagedList.IPagedList<MealsToGo.Models.UserDetail>
+
+@{
+    ViewBag.Title = "Users";
+    int mealadCount = Model.Count();
+    
+}
+
+<div class="cont-main">
+    <h1>Your Existing Users</h1>
+    <div class="cont">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+
+                <td>
+
+                    <div class="cont-rit">
+                        <ul class="gen-form">
+                            <li>@using (Html.BeginForm())
+                                {
+                                <p>
+                                    Find by name:
+                                </p> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "gen-ftb" })
+                                
+
+                                    <input type="submit" name="button2" id="button2" value="Search" class="submit" />
+                                
+                   
+                                }</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+
+                <td height="30" align="right" valign="top"><span class="normal-12">
+                    @Html.ActionLink("Create New", "Create", routeValues: new { userID = WebSecurity.CurrentUserId }, htmlAttributes: new { @class = "menu-14u" })</span>
+
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="1">
+                    @if (mealadCount == 0)
+                    {  <p>Record not found</p>}
+                    else
+                    {
+                        <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#c6c3c3" style="border-collapse: collapse;">
+                            <tr>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</strong></td>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })</strong></td>
+                                <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>City</strong></td>
+                                <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>State/Province</strong></td>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Zipcode</strong></td>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Country</strong></td>
+                                <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Telephone </strong></td>
+                                <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Photo </strong></td>
+                                <td width="30%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Action </strong></td>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="normal-14">
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td class="normal-14">
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+
+                                    <td class="normal-14">
+                                        @Html.DisplayFor(modelItem => item.AddressList.City)
+                                    </td>
+                                    <td class="normal-14">
+                                        @Html.DisplayFor(modelItem => item.AddressList.Province)
+                                    </td>
+                                    <td class="normal-14">
+                                        @Html.DisplayFor(modelItem => item.AddressList.Zip)
+                                    </td>
+                                    <td class="normal-14">
+                                        @Html.DisplayFor(modelItem => item.AddressList.LKUPCountry.Country, new { @class = "gen-ftb" })
+                                    </td>
+                                    <td class="normal-14">
+                                        @Html.DisplayFor(modelItem => item.AddressList.Telephone)
+                                    </td>
+                                    <td class="normal-14">
+                                        @if (!string.IsNullOrEmpty(item.Photo))
+                                        {
+                                            <img src="~/ProfilePhotos/@(item.Photo)" />
+                                        }
+                                    </td>
+
+                                    <td height="35" class="normal-14">
+                                        @Html.ActionLink("Locate", "Locate", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", new { userid = item.UserId /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { userid = item.UserId /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { userid = item.UserId /* id=item.PrimaryKey */ })
+                                    </td>
+                                </tr>
+                             
+                            }
+                            <tr>
+                                <td colspan="9">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                    of @Model.PageCount
+
+                                    @if (Model.HasPreviousPage)
+                                    {
+                                        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                                        @Html.Raw(" ");
+                                        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                                    }
+                                    else
+                                    {
+                                        @:<<
+                                        @Html.Raw(" ");
+                                        @:< Prev
+    }
+
+                                    @if (Model.HasNextPage)
+                                    {
+                                        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                                        @Html.Raw(" ");
+                                        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                                    }
+                                    else
+                                    {
+                                        @:Next >
+                                        @Html.Raw(" ")
+                                        @:>>
+    }
+
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>

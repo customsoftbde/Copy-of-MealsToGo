@@ -1,0 +1,10 @@
+﻿@model MealsToGo.ViewModels.DeliveryMethodViewModel
+
+
+  
+    @Html.CheckBoxFor(model =>model.Selected)
+ @Html.LabelFor(model => model.Selected, Model.DeliveryMethod, new { @class = "checkbox" })
+       
+   @Html.HiddenFor(model => model.DeliveryMethodID)
+ 
+           

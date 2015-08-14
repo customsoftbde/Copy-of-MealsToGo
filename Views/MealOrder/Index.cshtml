@@ -1,0 +1,100 @@
+﻿@model IEnumerable<MealsToGo.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null, new { @class = "menu-14u" })
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MealItemId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserDetails.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityOrdered)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstimatedPickupTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActualPickUpTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeedbackOnQuality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeedbackOnTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeedbackOnPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GeneralFeedback)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MealItemId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserDetails.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityOrdered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstimatedPickupTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualPickUpTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeedbackOnQuality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeedbackOnTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeedbackOnPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GeneralFeedback)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

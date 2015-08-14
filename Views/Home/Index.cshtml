@@ -1,0 +1,380 @@
+﻿@model MealsToGo.ViewModels.ResultSetViewModel
+
+
+@using MealsToGo.Helpers
+@using MealsToGo.Models
+@using Trirand.Web.Mvc
+@using JQGridMVCExamples.Models;
+
+
+@{
+    ViewBag.Title = "Search" + @Url.Action("Index");
+}
+
+@*   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">*@
+@*  <link rel="stylesheet" type="text/css" href="http://www.trirand.net/aspnetmvc/Content/themes/ui.jqgrid.css" />*@
+<link href="~/Content/themes/smoothness/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+
+<link href="~/Content/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+
+<!-- Page styles -->
+@*<link type='text/css' href='Content/css/demo.css' rel='stylesheet' media='screen' />*@
+
+<!-- Contact Form CSS files -->
+@*<link type='text/css' href='Content/css/basic.css' rel='stylesheet' media='screen' />*@
+
+<!-- IE6 "fix" for the close png image -->
+<!--[if lt IE 7]>
+<link type='text/css' href='Content/css/basic_ie.css' rel='stylesheet' media='screen' />
+<![endif]-->
+
+<!-- JS files are loaded at the bottom of the page -->
+
+@*<script type='text/javascript' src='~/Scripts/js/jquery.js'></script>*@
+@*<script type='text/javascript' src='~/Scripts/js/jquery.simplemodal.js'></script>*@
+
+
+
+
+<script type="text/javascript" src="~/Scripts/grid.locale-en.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.jqGrid.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+
+    //function returnHyperLink(cellValue, options, rowdata, action) {
+    //    return "<a href='./test.do?custId=" + options.rowId + "' >Add To Cart</a>";
+    //}
+    function returnHyperLink(cellValue, options, rowdata, action) {
+        return "<a href='#' onclick=\"funAddtoCart('" + options.rowId + "','" + rowdata.Price + "');\">Add To Cart</a>";
+    }
+    function returnHyperLinkReservation(cellValue, options, rowdata, action) {
+        return "<a href='./test.do?custId=" + options.rowId + "' >Make a Reservation</a>";
+    }
+
+    function funAddtoCart(MealItemId, Price) {
+        var qty = 1;
+        jQuery.ajax("/Home/AddtoCart",
+         {
+             data: { mealItemId: MealItemId, qty: qty, itemName: MealItemId, price: Price },
+             type: "GET",
+             contentType: "application/json",
+             dataType: "json",
+             success: function (data) {
+                 jQuery('#cartCount').text(data);
+                 funGetCount();
+                 //Add and Display no. records in cart at the header section
+             },
+             error: function (e, s, t) {
+                 //alert(e.respon);
+             }
+         });
+    }
+    function funGetCount() {
+       // var qty = 1;
+        jQuery.ajax("/Home/GetCount",
+         {
+             data: {},
+             type: "GET",
+             contentType: "application/json",
+             dataType: "json",
+             success: function (data) {
+                 jQuery('#cartCount').text(data);
+                 //Add and Display no. records in cart at the header section
+             },
+             error: function (e, s, t) {
+                 //alert(e.respon);
+             }
+         });
+    }
+    funGetCount();
+    function funRemoveFromCart(mealItemId) {
+        jQuery.ajax("RemoveAllFromCart",
+         {
+             data: { mealItemId: mealItemId },
+             type: "GET",
+             contentType: "application/json",
+             dataType: "json",
+             success: function (data) {
+                 window.location.href = "cart";
+             },
+             error: function (e, s, t) {
+                 //alert(e.respon);
+             }
+         });
+    }
+
+    jQuery(document).ready(function () {       
+        jQuery('.date-tb').unbind();
+        jQuery(".date-tb").datepicker({
+            dateFormat: "mm/dd/yy",
+            minDate: new Date, maxDate: 180
+        });
+
+        removeSubgridIcon = function () {
+            var $this = jQuery(this);
+            $this.find(">tbody>tr.jqgrow>td.ui-sgcollapsed").filter(function () {
+                var rowData = $this.jqGrid("getLocalRow",
+                        jQuery(this).closest("tr.jqgrow").attr("id"));
+                return rowData.Products == null;
+            }).unbind("click").html("");
+        },
+
+        isHasSubrids = function (data) {
+            var l = data.length, i;
+            for (i = 0; i < l; i++) {
+                if (data[i].Products != null) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        var myData = @Html.Raw(Json.Encode(Model.ProviderList))
+               myData, $grid = jQuery("#list");
+
+        $grid.jqGrid({
+            datatype: "local",
+            data: myData,
+            width: "100%",
+            colNames: ["ProviderName", "ProviderType", "Cuisine", "Distance", "Phone", "Reservation"],
+            colModel: [
+                { name: "ProviderName", width: 100, sorttype: "string", resizable: false },
+                 { name: "ProviderType", width: 100, key: true, sorttype: "string", resizable: false },
+                  { name: "Cuisine", width: 100, sorttype: "string", resizable: false },
+                { name: "Distance", width: 100, sorttype: "string", resizable: false },
+             { name: "PhoneNumber", width: 100, resizable: false },
+             { name: "Reservation", width: 100, resizable: false, formatter: returnHyperLinkReservation }
+            ],
+            rowNum: 10,
+            rowList: [5, 10, 20],
+            pager: "#pager",
+            gridview: true,
+            ignoreCase: true,
+            rownumbers: true,
+            hidegrid: false,
+            viewrecords: true,
+            height: "100%",
+            subGrid: isHasSubrids(myData),
+            subGridRowExpanded: function (subgridId, rowid) {
+                var subgridTableId = subgridId + "_t";
+                jQuery("#" + subgridId).html("<table id='" + subgridTableId + "'></table>");
+                jQuery("#" + subgridTableId).jqGrid({
+                    datatype: "local",
+                    data: jQuery(this).jqGrid("getLocalRow", rowid).Products,
+                    colNames: ["MealAdID","MealItemName", "MealType", "Ingredients", "Allergens", "Price", "Add To Cart"],
+                    colModel: [
+                        {
+                            name: "MealAdID", width: 100, key: true, resizable: false
+                        },
+                        {
+                            name: "MealItemName", width: 100, key: false, resizable: false
+                        },
+                          { name: "MealType", width: 100, resizable: false },
+
+                        { name: "Ingredients", width: 100, resizable: false },
+                         { name: "AllergenicIngredients", width: 100, resizable: false },
+                           { name: "Price", width: 100, resizable: false },
+
+                        { name: "Add To Cart", width: 100, resizable: false, formatter: returnHyperLink },
+                    ],
+                    height: "100%",
+                    rowNum: 10,
+                    sortname: "MealItemName",
+                    idPrefix: "s_" + rowid + "_"
+                });
+            },
+            caption: "Eateries"
+        });
+        $grid.jqGrid("navGrid", "#pager", { add: false, edit: false, del: false, search: true, nav: false }, { width: 300 });
+
+        var subGridOptions = $grid.jqGrid("getGridParam", "subGridOptions"),
+            plusIcon = subGridOptions.plusicon,
+            minusIcon = subGridOptions.minusicon,
+            expandAllTitle = "Expand all subgrids",
+            collapseAllTitle = "Collapse all subgrids";
+        jQuery("#jqgh_" + $grid[0].id + "_subgrid")
+            .html('<a style="cursor: pointer;"><span class="ui-icon ' + plusIcon + '" title="' + expandAllTitle + '"></span></a>')
+            .click(function () {
+                var $spanIcon = jQuery(this).find(">a>span"),
+                    $body = jQuery(this).closest(".ui-jqgrid-view")
+                        .find(">.ui-jqgrid-bdiv>div>.ui-jqgrid-btable>tbody");
+                if ($spanIcon.hasClass(plusIcon)) {
+                    $spanIcon.removeClass(plusIcon)
+                        .addClass(minusIcon)
+                        .attr("title", collapseAllTitle);
+                    $body.find(">tr.jqgrow>td.sgcollapsed")
+                        .click();
+                } else {
+                    $spanIcon.removeClass(minusIcon)
+                        .addClass(plusIcon)
+                        .attr("title", expandAllTitle);
+                    $body.find(">tr.jqgrow>td.sgexpanded")
+                        .click();
+                }
+            });
+    });
+    jQuery("#divAddToCart").dialog({
+        resizable: false,
+        modal: true,
+        title: "Modal",
+        height: 250,
+        width: 400,
+        buttons: {
+            Ok: function () {
+                jQuery(this).dialog("close");
+            }
+        }
+        //autoOpen: false,
+        //height: 300,
+        //width: 350,
+        //modal: true,
+        //buttons: {
+        //    "Create an account": addUser,
+        //    Cancel: function () {
+        //        dialog.dialog("close");
+        //    }
+        //},
+        //close: function () {
+
+        //}
+    });
+    jQuery("#divAddToCart").dialog("open");
+</script>
+@*<div id="divAddToCart" title="Add to cart">
+    <table width="100%" border="1" cellpadding="5" cellspacing="0" bordercolor="#E8E8E8" style="border-collapse: collapse;">
+        <tbody>
+            <tr>
+
+                <td width="30%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><strong>Product Name</strong></td>
+                <td width="30%" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Price</strong></td>
+                <td width="30%" height="30" align="center" bgcolor="#E2E2E2" class="normal14"><strong>Qty.</strong></td>
+            </tr>
+            <tr>
+                <td width="30%" height="30" align="left" bgcolor="#E2E2E2" class="normal14"><span id="productName"></span></td>
+                <td width="30%" align="center" bgcolor="#E2E2E2" class="normal14"><span id="price"></span></td>
+                <td width="30%" height="30" align="center" bgcolor="#E2E2E2" class="normal14">
+                    <select id="qty">
+                        <option value="1" title="1">1</option>
+                        <option value="2" title="2">2</option>
+                        <option value="3" title="3">3</option>
+                        <option value="4" title="4">4</option>
+                        <option value="5" title="5">5</option>
+                        <option value="6" title="6">6</option>
+                        <option value="7" title="7">7</option>
+                        <option value="8" title="8">8</option>
+                        <option value="9" title="9">9</option>
+                        <option value="10" title="10">10</option>
+                    </select></td>
+            </tr>
+           
+        </tbody>
+    </table>
+</div>*@
+<span class="normal14">
+    <span class="error">
+        @ViewBag.ErrorMessage
+    </span>    
+   @*@Html.Label("strz", Convert.ToString(ViewBag.ErrorMessage), new { @class = "error" })*@
+   
+    </span>
+    <div class="cont-main">
+        <div class="se-reslt">
+            @*  <h2>Current Location: @Session["UserLoc"]
+                 @using (Html.MyBeginForm(null, null, FormMethod.Post))
+                {
+                    @Html.ValidationSummary(false,"", new { @class = "error" })
+                    @Html.TextBox("ChangeLocation", null, new { style = "width:125px;", placeholder = "Change Location" })
+                    @Html.QueryAsHiddenFields()
+
+
+
+                }</h2>*@
+            @*  <h2>Search Results</h2>
+            *@
+            <div class="se-reslt2">
+                <h3>Filter by</h3>
+                @foreach (var f in Model.Search.Facets)
+                {
+
+                    <h4>
+                        @(Html.SolrFieldPropName<SolrResultSet>(@f.Key))
+                    </h4>
+                    <ul class="filter">
+                        <li><a class="removeFacet" href="@Url.RemoveFacet(f.Key) ">@f.Value </a></li>
+                    </ul>
+
+                }
+                @foreach (var f in Model.Facets)
+                {
+                    <h4>
+                        @(Html.SolrFacetPropName<SolrResultSet>(@f.Key))
+                    </h4>
+                    <ul class="filter">
+                        @foreach (var fv in f.Value)
+                        {
+                            <li><a href="@Url.SetFacet(f.Key, fv.Key) ">@fv.Key </a><span>(@fv.Value )</span></li>
+                        }
+                    </ul>
+
+
+                }
+
+            </div>
+        </div>
+
+        <div class="cont-rit">
+            <div class="se-form">
+                @using (Html.MyBeginForm(null, null, FormMethod.Get))
+                {
+
+                    <label>
+                        @*  @Html.TextBoxFor(m => m.Search.PickUpDateSearch, "{0:MM/dd/yyyy}", new { @class = "date-tb", placeholder = "Current Date" })
+                        *@   @Html.TextBoxFor(m => m.Search.PickUpDateSearch, "{0:MM/dd/yyyy}", new { @class = "date-tb food-tb2", placeholder = "Current Date", Readonly = true })
+                    </label>
+                    <label>
+                        @Html.TextBoxFor(m => m.Search.FreeSearch, new { @class = "food-tb2", placeholder = "pizza,vegetarian" })
+                    </label>
+                    <br /><br />
+                    <label>
+                        @*@Html.TextBox("ChangeLocation", "current loc", new { @class = "food-tb2" })*@
+                        @Html.TextBox("ChangeLocation", "", new { @class = "food-tb2", placeholder = "Current Loc" })
+                    </label>
+
+                    <label>
+                        @Html.DropDownListFor(x => x.DistanceDD.SelectedDistanceLimit, Model.DistanceDD.DistanceDDList, "Within", new { @class = "dist-tb food-tb2", style = "width:260px;" })
+                        @Html.QueryAsHiddenFields()
+                    </label>
+
+                    <input name="button2" type="submit" class="search2" id="button2" value="Search" />
+                    if (!string.IsNullOrEmpty(Model.DidYouMean))
+                    {
+                        <div>Did you mean</div>
+                        <strong><em>@Html.ActionLink(@Model.DidYouMean, @Url.ForQuery(Model.DidYouMean))</em></strong>
+
+                    }
+                    <br />
+
+                }
+                <div style="padding-top:35px;"></div>
+                <div class="gride">
+                    <table id="list">
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="pager"></div>
+            </div>
+
+
+        </div>
+        <div class="clr"></div>
+    </div>
+
+    <script type="text/javascript" src="~/Scripts/Funfooding_Order.js"></script>
+
+

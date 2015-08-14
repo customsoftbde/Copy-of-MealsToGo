@@ -1,0 +1,28 @@
+﻿@model MealsToGo.Models.StandardEmail
+
+@{
+    Layout = null;
+}
+ 
+To: @Model.To
+From: support@funfooding.com
+Subject: Welcome to Fun Fooding!
+<html>
+    <body>
+        <p>
+            Hello @Model.Name,<br />
+Thank You for signing up!<br /><br />
+
+To complete the sign up process click <a href="@Model.ConfirmationToken">here</a>.<br /><br />
+
+
+
+If you have any problem completing the registration form, please contact <a href="mailto:support@funfooding.com">support@funfooding.com</a>.<br /><br />
+
+ 
+Best Regards,<br />
+Support Team<br />
+http://www.funfooding.com<br />
+            </p>
+        </body>
+</html>

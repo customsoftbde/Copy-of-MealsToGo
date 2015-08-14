@@ -1,0 +1,64 @@
+﻿@model MealsToGo.Models.UserSetting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>UserSetting</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserSettingsID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserSettingsID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ActivityTypeID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActivityTypeID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PrivacySettingsID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PrivacySettingsID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReceiveEmailNotification)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReceiveEmailNotification)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReceiveMobileTextNotification)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReceiveMobileTextNotification)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NotificationFrequency)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NotificationFrequency)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit",null, new { @class = "menu-14u" }) |
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "menu-14u" })
+</p>

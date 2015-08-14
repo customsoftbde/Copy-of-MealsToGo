@@ -1,0 +1,66 @@
+﻿@model MealsToGo.ViewModels.EmailaddressesViewModel
+
+@{
+    ViewBag.Title = "Invite";
+}
+@using (Html.BeginForm("Invite", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.UserID)
+    @*@Html.ValidationSummary(false,"", new { @class = "error" })*@
+    <div class="cont-main">
+        <h1>Invite</h1>
+
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>@Html.LabelFor(x => x.Emailaddresses) </p>
+                        <textarea id="Emailaddresses" class="gen-ftb" style="width: 450px;height:100px" placeholder="Use comma separated emails" data-val-required="The Emailaddresses field is required." data-val="true" rows="2"  cols="20"></textarea>
+                        @*@Html.TextAreaFor(x => x.Emailaddresses, new { placeholder = "Use comma separated emails", style = "width: 450px;height:100px" , @class = "gen-ftb"})<br />*@
+                        @Html.ValidationMessageFor(x => x.Emailaddresses)
+
+                    </li>
+                    <li>
+                        <p>@Html.LabelFor(x => x.EmailMessage)</p>
+
+                        @Html.TextAreaFor(x => x.EmailMessage, new { placeholder = "Check out FunFooding.com", style = "width: 450px;height:100px" , @class = "gen-ftb"})<br />
+                        @Html.ValidationMessageFor(x => x.EmailMessage)
+                    </li>
+                    <li>
+                        <label>
+                            <input type="submit" name="button2" id="button2" value="Invite" class="submit" />
+                        </label>
+
+                        @*@Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })*@
+                    </li>
+                    <div class="clr"></div>
+                </ul>
+            </div>
+            <div class="clr"></div>
+        </div>
+    </div>
+}
+
+
+@*@using (Html.BeginForm("Invite", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+    <fieldset>
+        <legend>Invite</legend>
+        Use comma separated emails<br />
+        @Html.LabelFor(x => x.Emailaddresses)
+        @Html.TextAreaFor(x => x.Emailaddresses, new { style = "width: 450px;height:100px" })
+        @Html.ValidationMessageFor(x => x.Emailaddresses)
+        <br />
+        @Html.LabelFor(x => x.EmailMessage)
+        @Html.TextAreaFor(x => x.EmailMessage, new { placeholder = "Check out FunFooding.com", style = "width: 400px;height:100px" })
+
+        <input type="submit" value="Invite" />
+
+    </fieldset>
+}*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

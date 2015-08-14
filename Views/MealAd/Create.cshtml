@@ -1,0 +1,169 @@
+﻿@model MealsToGo.ViewModels.MealAdViewModel
+
+@{
+    ViewBag.Title = "Create";
+
+
+    Model.PlacedOrder = 0;
+   
+    
+}
+@using (Html.BeginForm("Create", "MealAd", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(false, "", new { @class = "error" })
+    @Html.HiddenFor(model => model.PlacedOrder)
+    
+    
+    <div class="cont-main">
+        <h1>Meal Ad - Create</h1>
+
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>Meal Item<span class="required">(required)</span></p>
+
+                        @Html.DropDownListFor(x => x.MealItemsDD.SelectedMealItem, Model.MealItemsDD.MealItemsDDList, "Food To Advertise", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.MealItemsDD.SelectedMealItem)
+
+                    </li>
+
+
+                    <li>
+                        <p>Max Order</p>
+                        @*@Html.EditorFor(model => model.MaxOrders, new { @class = "gen-ftb" })*@
+                        <input id="MaxOrders" type="number" min="1" value="1" class="gen-ftb" />
+                        @Html.ValidationMessageFor(model => model.MaxOrders)
+                    </li>
+                    <li>
+                        <p>Payment Methods</p>
+                        @Html.EditorFor(model => model.PaymentMethods)
+
+                    <li>
+
+
+                    <li>
+                        <p>Delivery Methods</p>
+                        @Html.EditorFor(model => model.DeliveryMethods)
+                    </li>
+                    <li>
+                        <p>Ordering Options</p>
+                        @Html.DropDownListFor(x => x.AvailabilityTypeDD.SelectedAvailabilityType, Model.AvailabilityTypeDD.AvailabilityTypeDDList, "Ordering Option", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.AvailabilityTypeDD.SelectedAvailabilityType)
+
+
+                    </li>
+
+                    <li>
+                        <p>Schedule</p>
+                        <table id="tblMealAdSchedules">
+                            <tr><td>
+                                @Html.EditorFor(model => model.MealAdSchedules)
+                                </td>
+                            </tr>
+                        </table>
+                        @* @Html.Partial("SchedulePartial", Model.MealAdSchedules)
+                     @foreach (var category in Model.MealAdSchedules)
+                        {
+                            @Html.Partial("SchedulePartial", Model.MealAdSchedules)
+                        }*@
+                        @*@Html.EditorFor(x => x.MealAdSchedules, "~/Views/MealAd/SchedulePartial.cshtml")*@
+
+                    </li>
+                    @*@Html.ActionLink("Add category...", "AddCategory", null, new { id = "addCategoryItem" })*@
+                    <a href="#" id="aMealAdSchedules">Add another schedule</a>
+                    @*
+                    When a user clicks this link, display another set of model.MealAdSchedules[0].PickUpStartDateTime,model.MealAdSchedules[0].PickUpEndDateTime
+                    User shoudl be able to add as many schedules as they want.
+                    
+                    *@
+
+                    <li>
+                        <p>Status</p>
+                        @*@Html.CheckBoxFor(model=>model.Status)*@
+                        @*@Html.EditorFor(model => model.Status)*@
+                        @{
+    SelectListItem[] list = {
+                                            new SelectListItem{Value="1",Text="Active"},
+                                            new SelectListItem{Value="0",Text="Inactive"}};
+                            @Html.DropDownListFor(x => x.Status, list, new { @class = "gen-ftb" })
+                        }
+                    </li>
+
+                    <li>
+                        <label>
+                            <input type="submit" name="button2" id="button2" value="Advertise" class="submit" />
+                        </label>
+
+                        @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                    </li>
+                    <div class="clr"></div>
+                </ul>
+
+
+            </div>
+            <div class="clr"></div>
+
+        </div>
+
+    </div>
+@*<fieldset>
+        <legend>MealAd</legend>
+
+      
+        <div class="editor-label">
+         @Html.LabelFor(model => model.MealItemID,"MealItem")
+        </div>
+        <div class="editor-field">
+             @Html.DropDownListFor(x => x.MealItemID, Model.MealItemsDDList,  "MealItem")
+            @Html.ValidationMessageFor(model => model.MealItemID)
+        </div>
+
+         <div class="editor-label">
+            @Html.LabelFor(model => model.PickUpTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PickUpTime)
+            @Html.ValidationMessageFor(model => model.PickUpTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MaxOrders)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MaxOrders)
+            @Html.ValidationMessageFor(model => model.MaxOrders)
+        </div>
+
+      
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastOrderTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastOrderTime)
+            @Html.ValidationMessageFor(model => model.LastOrderTime)
+        </div>
+
+         <div class="editor-label">
+               @Html.LabelFor(model => model.DeliveryMethodDDList,"Delivery Methods")
+        </div>
+        <div class="editor-field">
+             @Html.DropDownListFor(x => x.DeliveryMethodID, Model.DeliveryMethodDDList,  "Delivery Methods")
+            @Html.ValidationMessageFor(model => model.DeliveryMethodID)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>*@
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript" src="~/Scripts/Funfooding_Order.js"></script>

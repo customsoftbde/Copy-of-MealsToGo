@@ -1,0 +1,131 @@
+﻿@model IEnumerable<MealsToGo.Models.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    int mealadCount = Model.Count();
+}
+<div class="cont-main">
+    <h1>Index</h1>
+    <div class="cont">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="30" align="right" valign="top"><span class="normal-12">
+                    @Html.ActionLink("Connect", "Invite", "User", routeValues: new { userID = WebSecurity.CurrentUserId }, htmlAttributes: new { @class = "menu-14u" })</span></td>
+            </tr>
+             <tr>
+                <td height="30" align="right" valign="top"><span class="normal-12">@Html.ActionLink("Create New", "Create", routeValues: new { userID = WebSecurity.CurrentUserId }, htmlAttributes: new { @class = "menu-14u" })</span></td>
+            </tr>
+            <tr>
+                <td>
+                    @if (mealadCount == 0)
+                    {  <p>No records found.</p>}
+                    else
+                    {
+
+                        <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#c6c3c3" style="border-collapse: collapse;">
+                            
+                            <tr>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.DisplayNameFor(model => model.KitchenName)</strong></td>
+                                <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.DisplayNameFor(model => model.CuisineType)</strong></td>
+                                <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.DisplayNameFor(model => model.MostPopularDish)</strong></td>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.DisplayNameFor(model => model.FavoriteDish)</strong></td>
+                                <td width="15%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.DisplayNameFor(model => model.EmailContact)</strong></td>
+                                <td width="5%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>@Html.DisplayNameFor(model => model.GetNotified) </strong></td>
+                                <td width="35%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Action </strong></td>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="normal-14">@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td class="normal-14">@Html.DisplayFor(modelItem => item.KitchenName)</td>
+                                    <td align="center" class="normal-14">@Html.DisplayFor(modelItem => item.CuisineType)</td>
+                                    <td align="center" class="normal-14">@Html.DisplayFor(modelItem => item.MostPopularDish)</td>
+                                    <td height="35" class="normal-12">@Html.DisplayFor(modelItem => item.FavoriteDish)</td>
+                                    <td class="normal-12">@Html.DisplayFor(modelItem => item.EmailContact)</td>
+                                    <td class="normal-12">@Html.DisplayFor(modelItem => item.GetNotified)</td>
+                                    <td height="35" class="normal-14">
+                                        @Html.ActionLink("Edit", "Edit", new { }, new { @class = "submit5" })
+                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "submit5" })
+                                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @class = "submit5" })
+                                        @* @Html.ActionLink("Place Ad", "Create", "MealAd", routeValues: new { mealitemid = item.MealItemId, userID = WebSecurity.CurrentUserId }, htmlAttributes: new { @class = "submit5" })
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.MealItemId }, new { @class = "submit5" })
+                                        @Html.ActionLink("Details", "Details", new { id = item.MealItemId }, new { @class = "submit5" })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.MealItemId }, new { @class = "submit5" })*@
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    }
+                </td>
+            </tr>
+        </table>
+        <div class="clr"></div>
+
+    </div>
+</div>
+@*<h2>Index</h2>
+<h2>@Html.ActionLink("Connect", "Invite", "User", routeValues: new { userID = WebSecurity.CurrentUserId }, htmlAttributes: null)</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KitchenName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CuisineType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MostPopularDish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FavoriteDish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailContact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetNotified)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KitchenName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuisineType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MostPopularDish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FavoriteDish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailContact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GetNotified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>*@

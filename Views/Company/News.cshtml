@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "News";
+}
+@{
+    if (Request.IsAuthenticated)
+    {
+     Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+    else
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+}
+
+<div class="cont-main">
+  <h1>In the News</h1>
+  <div class="cont">
+      <p>
+    Gearing to be in the News! 
+      </p>
+  </div>
+
+</div>
+

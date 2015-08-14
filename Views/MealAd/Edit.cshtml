@@ -1,0 +1,154 @@
+﻿@model MealsToGo.ViewModels.MealAdViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("Edit", "MealAd", FormMethod.Post))
+{
+    @Html.ValidationSummary(false, "", new { @class = "error" })
+    @Html.HiddenFor(model => model.MealAdID)
+    <div class="cont-main">
+        <h1>Meal Ad - Edit</h1>
+        @*@Html.HiddenFor(model => model.MealItemID)*@
+        @Html.HiddenFor(model => model.MealAdID)
+        @*@Html.HiddenFor(model => model.LastOrderTime)*@
+        @*@Html.HiddenFor(model => model.PickUpTime)*@
+
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>Meal Item</p>
+                        @Html.DisplayFor(model => model.MealItemName, new { @class = "gen-ftb" })
+                        @*@Html.DropDownListFor(x => x.MealItemID, Model.MealItemsDDList, "MealItem", new { @class = "gen-ftb" })*@
+
+                    </li>
+                    @* <li>
+                            <p>Pickup time</p>
+                            @Html.EditorFor(model => model.PickUpTime, new { @class = "gen-ftb date" })
+                            @Html.ValidationMessageFor(model => model.PickUpTime)
+
+                        </li>*@
+                    <li>
+                        <p>Max Order</p>
+                        @Html.EditorFor(model => model.MaxOrders, new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.MaxOrders)
+                    </li>
+                    @*<li>
+                            <p>Last Order Time</p>
+                            @Html.DisplayFor(model => model.LastOrderTime, new { @class = "gen-ftb" })
+
+                        </li>*@
+                    <li>
+                        <p>Schedule</p>
+                        @* @foreach (var cat in Model.Categories)
+                            {
+                                @Html.EditorFor(model => cat, null, "");
+                            }*@
+                        <table id="tblMealAdSchedules">
+                            @* @foreach (var cat in Model.MealAdSchedules) *@
+                            @*@for (int i = 0; i < Model.MealAdSchedules.Count; i++)*@
+                            @for (int i = 0; i <1; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @* @Html.EditorFor(model => model.MealAdSchedules)*@
+                                        @Html.EditorFor(model => model.MealAdSchedules[i])
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </table>
+                        @* @Html.Partial("SchedulePartial", Model.MealAdSchedules)
+                            @foreach (var category in Model.MealAdSchedules)
+                               {
+                                   @Html.Partial("SchedulePartial", Model.MealAdSchedules)
+                               }*@
+                        @*@Html.EditorFor(x => x.MealAdSchedules, "~/Views/MealAd/SchedulePartial.cshtml")*@
+
+                    </li>
+                    @*@Html.ActionLink("Add category...", "AddCategory", null, new { id = "addCategoryItem" })*@
+                    <a href="#" id="aMealAdSchedules" class="menu-14u">Add another schedule</a>
+                    @*<li>
+                            <p>Delivery Methods</p>
+                            @Html.DropDownListFor(x => x.DeliveryMethodID, Model.DeliveryMethodDDList, "Delivery Methods", new { @class = "gen-ftb" })
+                            @Html.ValidationMessageFor(model => model.DeliveryMethodID)
+                        </li>*@
+                    <li>
+                        <label>
+                            <input type="submit" name="button2" id="button2" value="Save" class="submit" />
+                        </label>
+
+                        @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                    </li>
+                    <div class="clr"></div>
+                </ul>
+
+
+            </div>
+            <div class="clr"></div>
+
+        </div>
+
+    </div>
+    @*<fieldset>
+            <legend>MealAd</legend>
+
+            @Html.HiddenFor(model => model.MealAdID)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MealItemID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MealItemID)
+                @Html.ValidationMessageFor(model => model.MealItemID)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PickUpTime)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PickUpTime)
+                @Html.ValidationMessageFor(model => model.PickUpTime)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MaxOrders)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.MaxOrders)
+                @Html.ValidationMessageFor(model => model.MaxOrders)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PlacedOrder)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.PlacedOrder)
+                @Html.ValidationMessageFor(model => model.PlacedOrder)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LastOrderTime)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.LastOrderTime)
+                @Html.ValidationMessageFor(model => model.LastOrderTime)
+            </div>
+
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>*@
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript" src="~/Scripts/Funfooding_Order.js"></script>

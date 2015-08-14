@@ -1,0 +1,154 @@
+﻿@model MealsToGo.ViewModels.MealItemViewModel
+
+@{
+    ViewBag.Title = "Meal Item - Edit";
+}
+@using (Html.BeginForm("Edit", "MealItem", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+    @Html.HiddenFor(model => model.DateUpdated)
+    @Html.HiddenFor(model => model.UserId)
+    
+    @Html.HiddenFor(model => model.MealItemId)
+    <div class="cont-main">
+        <h1>Meal Item - Edit</h1>
+
+        <div class="cont">
+            <div class="cont-rit">
+                <ul class="gen-form">
+                    <li>
+                        <p>Name of Food</p>
+
+                        @Html.TextBoxFor(model => model.MealItemName, new { placeholder = "Pizza,sandwich,kebab...", @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.MealItemName)
+                    </li>
+                    <li>
+                        <p>Ingredients</p>
+                        @Html.TextAreaFor(model => model.Ingredients, new { placeholder = "tomato,cheese,basil...", @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.Ingredients)
+
+                    </li>
+                    <li>
+                        <p>Diet Type</p>
+                        @Html.DropDownListFor(x => x.DietTypeDD.SelectedDietType, Model.DietTypeDD.DietTypeDDList, "Diet Type", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.DietTypeDD.SelectedDietType)
+                    </li>
+                    <li>
+                        <p>Meal Type</p>
+                        @Html.DropDownListFor(x => x.MealTypeDD.SelectedMealType, Model.MealTypeDD.MealTypeDDList, "Meal Type", new { @class = "gen-ftb" })
+
+                        @Html.ValidationMessageFor(model => model.MealTypeDD.SelectedMealType)
+
+                    </li>
+                    <li>
+                        <p>Cuisine Type</p>
+                        @Html.DropDownListFor(x => x.CusineTypeDD.SelectedCuisine, Model.CusineTypeDD.CuisineDDList, "Cuisine Type", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.CusineTypeDD.SelectedCuisine)
+                    </li>
+                    <li>
+                        <p>Serving Unit</p>
+                        @Html.DropDownListFor(x => x.ServingUnit, Model.ServingUnitDDList, "Serving Unit", new { @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.ServingUnit)
+
+                    </li>
+                    <li>
+                        <p>Quantity</p>
+                        @Html.EditorFor(model => model.Quantity, new { placeholder = "Quantity", @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.Quantity)
+
+                    </li>
+
+                    <li>
+                        <p>Allergens(If Any)</p>
+                        @Html.EditorFor(model => model.AllergenDD)
+                    </li>
+
+                    @if (ViewData["MealItemViewModel"] != null)
+                    {
+                        var mealItem123 = ViewData["MealItemViewModel"] as MealsToGo.Models.MealItem;
+                        if (mealItem123.MealItems_Photos.Count > 0)
+                        {
+                        <li id="photos">
+                            <p>Photo(s)</p>
+                            <table width="40%" border="1" cellpadding="0" cellspacing="0" bordercolor="#c6c3c3" style="border-collapse: collapse; float: left;">
+                                <tr>
+                                    <td width="70%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Photo </strong></td>
+                                    <td width="30%" height="30" bgcolor="#EFEFEF" class="normal-12"><strong>Action </strong></td>
+                                </tr>
+                                @foreach (var photo in mealItem123.MealItems_Photos)
+                                {
+                                    var arrayfileName = photo.Photo.Split('\\');
+                                    var fileName = arrayfileName[arrayfileName.Length - 1];
+                                    <tr id="@photo.MealItemPhotoID">
+                                        <td class="normal-14">
+                                            <img src="~/MealPhotos/@(fileName)" height="100px"  width="100px" />
+                                        </td>
+
+                                        <td height="35" class="normal-14" style="vertical-align: middle; text-align: center;">
+                                            @*@Html.ActionLink("Remove", "RemovePhoto", new { id = photo.MealItemPhotoID })*@
+                                            <a href="#" class="RemovePhoto" name="@photo.MealItemPhotoID">Remove</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </li>
+                        }
+                    }
+                    <li>
+                        <p>Photo Upload :</p>
+
+
+                        <label>
+                            @Html.TextBoxFor(model => model.Photos, new { type = "file", multiple = "multiple" })
+                            @Html.ValidationMessageFor(model => model.Photos)
+
+                        </label>
+                        <label class="agree"></label>
+                    </li>
+                     <li>
+                        <p>Price</p>
+                        @Html.TextAreaFor(model => model.Price, new { placeholder = "Price", @class = "gen-ftb" })
+                        @Html.ValidationMessageFor(model => model.Price)
+
+                    </li>
+                    <li>
+                        <p>Status</p>
+                        @*@Html.CheckBoxFor(model=>model.Status)*@
+                        @*@Html.EditorFor(model => model.Status)*@
+                        @{
+                    SelectListItem[] list = {
+                                            new SelectListItem{Value="1",Text="Active"},
+                                            new SelectListItem{Value="2",Text="Inactive"}};
+                            @Html.DropDownListFor(x => x.Status, list,new { @class = "gen-ftb" })
+                        }
+                    </li>
+                    <li>
+                        <label>
+                            <input type="submit" name="button2" id="button2" value="Save" class="submit" />
+                        </label>
+                        @Html.ActionLink("Back to List", "Index", new { userID = WebSecurity.CurrentUserId }, new { @class = "menu-14u" })
+                        @*@Html.ActionLink("Back to List", "Index", new { @class = "menu-14u" })*@
+                    </li>
+                    <div class="clr"></div>
+                </ul>
+
+
+            </div>
+            <div class="clr"></div>
+
+        </div>
+
+    </div>
+
+    
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="~/Scripts/Funfooding_Order.js"></script>

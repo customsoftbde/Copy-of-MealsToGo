@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MealsToGo.ViewModels.UserSettingsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    int UserID = 0;
+    if (Request.IsAuthenticated)
+    {
+        UserID = WebSecurity.CurrentUserId;
+
+    }
+}
+
+<div class="cont-main">
+    <h1>Following are you current privacy settings. </h1>
+    <h2>Click to @Html.ActionLink("Confirm","Confirm", "Settings", routeValues: new { userID = UserID }, htmlAttributes:new { @class = "menu-14u" })
+    </h2>
+    <div class="cont">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td width="37%" height="35" class="normal-14"><strong>Activity Type</strong></td>
+                        </tr>
+                        <tr>
+                            <td height="35" class="normal-14"><strong>Privacy Level</strong></td>
+                        </tr>
+                        <tr>
+                            <td height="35" class="normal-14"><strong>Receive Email Notification</strong></td>
+                        </tr>
+                        <tr>
+                            <td height="35" class="normal-14"><strong>Receive Text Notification</strong></td>
+                        </tr>
+                        <tr>
+                            <td height="35" class="normal-14"><strong>Notification Frequency </strong></td>
+                        </tr>
+                    </table>
+                </td>
+                @foreach (var item in Model)
+                {
+                    <td>
+                        <table style="margin-top:35px">
+                            <tr>
+                                <td width="37%" height="35" class="normal-14"><strong>@Html.DisplayFor(modelItem => item.ActivityType)</strong></td>
+                            </tr>
+                            <tr>
+                                <td height="35" class="normal-14">@Html.DisplayFor(modelItem => item.PrivacySetting)</td>
+                            </tr>
+                            <tr>
+                                <td height="35" class="normal-14">@Html.DisplayFor(modelItem => item.ReceiveEmailNotification)</td>
+                            </tr>
+                            <tr>
+                                <td height="35" class="normal-14">@Html.DisplayFor(modelItem => item.ReceiveMobileTextNotification)</td>
+                            </tr>
+                            <tr>
+                                <td height="35" class="normal-14">@Html.DisplayFor(modelItem => item.NotificationFrequency)</td>
+                            </tr>
+                            <tr>
+                                <td height="35" class="normal-14">@Html.ActionLink("Edit", "Edit", new { usersettingsid = item.UserSettingsID }, new { @class = "menu-14u" })</td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+
+            </tr>
+        </table>
+    </div>
+    </div>
+    

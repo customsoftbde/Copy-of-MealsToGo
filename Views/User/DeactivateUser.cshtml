@@ -1,0 +1,30 @@
+﻿@model MealsToGo.Models.UserDetail
+
+@{
+    ViewBag.Title = "DeactivateUser";
+     Model.DateUpdated = DateTime.Now;
+}
+
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("DeactivateUser", "User"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false,"", new { @class = "error" })
+
+    <fieldset>
+        <legend>Please provide us a reason for leaving. Is there any way we can make your experience better?</legend>
+
+         @Html.HiddenFor(model => model.UserId)
+        
+        <ol>
+            <li><a href=#use>
+                @Html.LabelFor(m => m.Notes)
+                @Html.PasswordFor(m => m.Notes)
+            </li>
+          
+        </ol>
+        <input type="submit" value="Save" />
+        <input type="reset" value="Cancel" />
+    </fieldset>
+}

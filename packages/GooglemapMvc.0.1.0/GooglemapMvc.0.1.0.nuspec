@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>GooglemapMvc</id>
+    <version>0.1.0</version>
+    <title>Googlemap Mvc (Beta)</title>
+    <authors>jmelosegui</authors>
+    <owners>jmelosegui</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Googlemap Mvc wraps Google maps API simplifying the use of Google maps in ASP.NET MVC applications.</description>
+    <tags>Googlemap aspnetmvc Telerik</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework3.5">
+        <dependency id="TelerikMvcExtensions" version="2012.1.214" />
+      </group>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="TelerikMvcExtensions" version="2012.1.214" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
